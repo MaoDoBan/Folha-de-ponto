@@ -11,7 +11,35 @@
 </head>
 
 <body>
-  <h1 class="titulo">Folha de Ponto</h1>
+  <div id="app">
+    <div id="menu-bar">
+      <div id="logo"> <div class="icon"></div> <div id="nome-empresa">LIMPATEC</div> </div>
+
+      <div id="menu">
+        <div class="menu-item"> <button @click="cliqueItemMenu">Início</button> </div>
+        <div class="menu-item"> <button @click="cliqueItemMenu">Cargos</button> </div>
+        <div class="menu-item"> <button @click="cliqueItemMenu">Calendário</button> </div>
+      </div>
+    </div>
+
+    <div class="conteudo">
+      <div id="inicio" v-if="page == 'Início'">Vai ter uma página inicial aqui</div>
+
+      <ul id="cargos" v-if="page == 'Cargos'">
+        <li v-for="cargo in cargos">{{ cargo.nome }}</li>
+      </ul>
+
+      <div id="calendario" v-if="page == 'Calendário'">Vai ter um calendário aqui</div>
+
+      <div id="funcionario" v-if="page == 'Funcionário'">Vai ter um funcionário aqui</div>
+    </div>
+  </div>
+
+
+
+
+
+  <!--h1 class="titulo">Folha de Ponto</h1>
 
   <div id="app">
     <ul class="cargos">
@@ -19,6 +47,6 @@
         <button>{{ cargo.nome }}</button>
       </li>
     </ul>
-  </div>
+  </div-->
 </body>
 </html>

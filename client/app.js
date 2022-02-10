@@ -1,6 +1,7 @@
 const app = Vue.createApp({
   data(){
     return {
+      page: "Início",
       cargos: [
         { nome: "Manutenção" },
         { nome: "Motorista C" },
@@ -12,7 +13,11 @@ const app = Vue.createApp({
       ]
     };
   },
-  methods: {}
+  methods: {
+    cliqueItemMenu(event){
+      this.page = event.target.innerText;
+    }
+  }
 });
 
 app.mount("#app");
