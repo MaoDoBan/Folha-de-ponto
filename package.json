@@ -1,0 +1,26 @@
+{
+  "name": "ficha-de-ponto",
+  "version": "0.1.0",
+  "description": "Bah.",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run build && node ./js/src/runTests.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "dotenv": "^10.0.0",
+    "pino": "^7.6.2",
+    "pino-pretty": "^7.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.6",
+    "@types/pino": "^7.0.5",
+    "@types/pino-pretty": "^4.7.4"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "author": "MaoDoBan",
+  "license": "ISC"
+}
