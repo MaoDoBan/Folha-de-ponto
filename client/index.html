@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="menu.css">
   <link rel="stylesheet" href="cargos.css">
+  <link rel="stylesheet" href="funcionario.css">
   <script src="app.js" defer></script>
 </head>
 
@@ -21,6 +22,7 @@
         <div class="menu-item"> <button @click="clickItemMenu">Início</button>     </div>
         <div class="menu-item"> <button @click="clickItemMenu">Cargos</button>     </div>
         <div class="menu-item"> <button @click="clickItemMenu">Calendário</button> </div>
+        <div class="menu-item"> <button @click="clickItemMenu">Funcionário</button> </div>
       </div>
     </div>
 
@@ -28,12 +30,18 @@
       <div id="inicio" v-if="page == 'Início'">Vai ter uma página inicial aqui</div>
 
       <ul id="cargos" v-if="page == 'Cargos'">
-        <li v-for="cargo in cargos">{{ cargo.nome }}</li>
+        <li v-for="cargo in cargos" @click="clickCargo">{{ cargo.nome }}</li>
       </ul>
 
       <div id="calendario" v-if="page == 'Calendário'">Vai ter um calendário aqui</div>
 
-      <div id="funcionario" v-if="page == 'Funcionário'">Vai ter um funcionário aqui</div>
+      <ul id="funcionario" v-if="page == 'Funcionário'">
+        <li id="header"> <div id="grid-hf">Funcionário: {{ funcionario }}</div> <div id="grid-hc">Cargo: {{ cargo }}</div> </li>
+        <li></li>
+        <!--li v-for="dia in getDias(funcionario, mes)" @click="clickFuncionario">
+          <div></div>
+        </li-->
+      </ul>
     </div>
   </div>
 </body>
