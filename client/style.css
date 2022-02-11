@@ -8,7 +8,7 @@
   --cor-item-menu: #40445e;
   --cor-menu-selecionado: #212333;
   --cor-item-conteúdo: #677c9d;
-  --cor-item-ct-selecionado: #6483b3;
+  --cor-item-ct-selecionado: #4b6a9b;
 }
 
 /* reset */
@@ -16,7 +16,6 @@ body,p,a,ul,li{
   margin: 0;
   padding: 0;
   text-decoration: none;
-  /*font-size: 20px;*/
 }
 li{
   list-style-type: none;
@@ -29,138 +28,12 @@ body{
 }
 
 #app{
-  display: flex;
+  display: grid;
+  grid-template-columns: 420px auto;
+  height: 100%;
 }
 
-#menu-bar{
-  /*height: 100vh;*/
-  width: 420px;
-  background-color: var(--cor-fundo-menu);
-  padding: 40px 0;
-  color: var(--cor-branco);
-}
-
-#logo{
-  display: flex;
-  margin-left: 10px;
-}
-#logo .icon{
-  background-color: var(--cor-vermelho);
-  width: 64px;
-  height: 64px;
-  margin: 12px;
-}
-#nome-empresa{
-  font-size: 62px;
-  color: var(--cor-branco);
-  margin: auto 0;
-}
-
-#menu{
-  padding-top: 110px;
-}
-
-.menu-item{
-  margin-bottom: 20px;
-}
-.menu-item button{
-  border: 0;
-  padding: 0 0 0 99px;
-  font-size: 44px;
-  text-align: left;
-  color: var(--cor-branco);
-  width: 100%;
-  background-color: var(--cor-item-menu);
-}
-.menu-item button:hover{
-  background-color: var(--cor-menu-selecionado);
-}
-
-.conteudo{
+.content{
   padding: 40px;
   /*width: 100%;*/
 }
-
-#cargos{
-
-}
-
-#cargos li{
-  width: 16em;
-  text-align: center;
-  font-size: 30px;
-  padding: 9px;
-  margin-bottom: 10px;
-  background: var(--cor-item-conteúdo);
-}
-#cargos li:hover{
-  background: var(--cor-item-ct-selecionado);
-}
-
-/*.icon{
-  width: 40px;
-  height: 40px;
-  margin: 11px;
-}
-
-.text{
-  color: var(--cor-branco);
-}*/
-
-
-
-
-
-
-
-
-
-
-/*html{
-  background: var(--cor-fundo2);
-  padding: 12px 0;
-}
-
-body{
-  background: var(--cor-fundo);
-  overflow-x: hidden;
-  overflow-y: hidden;
-  font-family: 'Arial';
-  margin: auto;
-  max-width: 1024px;
-  height: 100%;
-  border-radius: 7px;
-  border: 1px solid var(--cor-preto);
-  color: var(--cor-texto);
-  padding: 15px 20px;
-}
-
-.titulo{
-  text-align: center;
-  border-bottom: 1px solid #555;
-  padding-bottom: 10px;
-}
-
-.cargos{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}*/
-
-/*#app button{
-  width: 20em;
-  text-align: center;
-  font-size: 21px;
-  text-transform: uppercase;
-  background: none;
-  border: 1px solid var(--cor-texto);
-  color: var(--cor-texto);
-  padding: 12px;
-  border-radius: 5px;
-  margin-bottom: 16px;
-  transition: 0.4s;*/
-  /*box-shadow: 1px 2px 3px rgba(0,0,0,0,6);*/
-/*}
-#app button:hover{
-  background: var(--cor-fundo2);
-}*/

@@ -1,0 +1,41 @@
+#menu-bar{
+  background-color: var(--cor-fundo-menu);
+  padding: 40px 0;
+  color: var(--cor-branco);
+}
+
+#logo{
+  display: flex;
+  margin-left: 10px;
+}
+#logo .icon{
+  background-color: var(--cor-vermelho);
+  width: 64px;
+  height: 64px;
+  margin: 12px;
+}
+#nome-empresa{
+  font-size: 62px;
+  color: var(--cor-branco);
+  margin: auto 0;
+}
+
+#menu{
+  padding-top: 110px;
+}
+
+.menu-item{
+  margin-bottom: 20px;
+}
+.menu-item button{
+  border: 0;
+  padding: 0 0 0 99px;
+  font-size: 44px;
+  text-align: left;
+  color: var(--cor-branco);
+  width: 100%;
+  background-color: var(--cor-item-menu);
+}
+.menu-item button:hover{
+  background-color: var(--cor-menu-selecionado);
+}
