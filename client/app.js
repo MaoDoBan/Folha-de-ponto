@@ -14,7 +14,7 @@ const app = Vue.createApp({
     };
   },
   methods: {
-    cliqueItemMenu(event){
+    clickItemMenu(event){
       this.page = event.target.innerText;
     }
   }

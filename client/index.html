@@ -7,6 +7,8 @@
   <title>Folha de Ponto</title>
   <script src="https://unpkg.com/vue@3.0.2"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="menu.css">
+  <link rel="stylesheet" href="cargos.css">
   <script src="app.js" defer></script>
 </head>
 
@@ -16,13 +18,13 @@
       <div id="logo"> <div class="icon"></div> <div id="nome-empresa">LIMPATEC</div> </div>
 
       <div id="menu">
-        <div class="menu-item"> <button @click="cliqueItemMenu">Início</button> </div>
-        <div class="menu-item"> <button @click="cliqueItemMenu">Cargos</button> </div>
-        <div class="menu-item"> <button @click="cliqueItemMenu">Calendário</button> </div>
+        <div class="menu-item"> <button @click="clickItemMenu">Início</button>     </div>
+        <div class="menu-item"> <button @click="clickItemMenu">Cargos</button>     </div>
+        <div class="menu-item"> <button @click="clickItemMenu">Calendário</button> </div>
       </div>
     </div>
 
-    <div class="conteudo">
+    <div class="content">
       <div id="inicio" v-if="page == 'Início'">Vai ter uma página inicial aqui</div>
 
       <ul id="cargos" v-if="page == 'Cargos'">
@@ -34,19 +36,5 @@
       <div id="funcionario" v-if="page == 'Funcionário'">Vai ter um funcionário aqui</div>
     </div>
   </div>
-
-
-
-
-
-  <!--h1 class="titulo">Folha de Ponto</h1>
-
-  <div id="app">
-    <ul class="cargos">
-      <li v-for="cargo in cargos">
-        <button>{{ cargo.nome }}</button>
-      </li>
-    </ul>
-  </div-->
 </body>
 </html>
