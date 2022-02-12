@@ -1,4 +1,27 @@
 #funcionario{
+  border: 1px solid var(--cor-preto);
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#funcionario th{
+  color: var(--cor-branco);
+  border: 1px solid var(--cor-preto);
+  background-color: var(--cor-item-conteúdo);
+}
+
+#funcionario td{
+  border: 1px solid var(--cor-preto);
+  background-color: #c3c8d5;
+}
+
+.f-header th{
+  background-color: var(--cor-fundo-header) !important;
+  font-size: 20px;
+}
+
+
+/*#funcionario{
   display: grid;
   grid-template-columns: repeat(14, 1fr);
   border: 1px solid var(--cor-preto);
@@ -35,5 +58,5 @@
 .total50{   grid-row: span 2; }
 .total100{  grid-row: span 2; }
 .csabado{   grid-row: span 2; }
-.h-obs{     grid-row: span 2; }
+.h-obs{     grid-row: span 2; }*/
 
