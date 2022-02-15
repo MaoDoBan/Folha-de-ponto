@@ -5,16 +5,14 @@ var app = express();
 //app.use(bodyParser.urlencoded({ extended: true }));a
 
 
-import path from 'path';
-import {fileURLToPath} from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const rootPath = path.dirname(__filename).replace("server", "");
+import { cleanDirPath } from "./cleanDirPath.js";
+const rootPath = cleanDirPath(import.meta.url);
 
 
-app.use(express.static(rootPath+"client"));
+app.use(express.static(rootPath+"/client"));
 
 app.get("/", (request, response) => {
-  response.sendFile(rootPath+"client\\index.html");
+  response.sendFile(rootPath+"/client/index.html");
 });
 
 const PORT = process.env.PORT || 8080;
