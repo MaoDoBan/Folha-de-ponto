@@ -9,8 +9,10 @@ Registra os horários de entrada, almoço e saída dos funcionários de uma empr
   }
 
 
-### Pra rodar o sistema:
+### Pra rodar o sistema via comando:
 npm start
+
+### Tem como rodar o sistema em windows clicando 2x no arquivo start.bat
 
 ### Requisitos para rodar o projeto:
 - Node.js versão 16.x
