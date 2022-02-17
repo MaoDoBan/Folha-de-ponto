@@ -1,0 +1,10 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+export function cleanDirPath(crudePath) {
+    const pathWithFileName = fileURLToPath(crudePath);
+    const pathToServerDir = path.dirname(pathWithFileName);
+    const pieces = pathToServerDir.split("\\");
+    pieces.pop();
+    pieces.pop();
+    return pieces.join('/') + "/system/client";
+}

@@ -7,5 +7,6 @@ export function cleanDirPath(crudePath: string){
 
   const pieces = pathToServerDir.split("\\");
   pieces.pop();
-  return pieces.join('/');
+  pieces.pop();
+  return pieces.join('/')+"/system/client";
 }
