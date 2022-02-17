@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/menu.css">
   <link rel="stylesheet" href="style/cargos.css">
-  <link rel="stylesheet" href="style/funcionario.css">
+  <link rel="stylesheet" href="style/funcionário.css">
   <script src="script/app.js" type="module"></script>
 </head>
 
@@ -26,22 +26,22 @@
     </div>
 
     <div class="content">
-      <div id="inicio" v-if="page == 'Início'">Vai ter uma página inicial aqui</div>
+      <div id="início" v-if="página == 'Início'">Vai ter uma página inicial aqui</div>
 
-      <ul id="cargos" v-if="page == 'Cargos'">
-        <li v-for="cargo in cargos" @click="clickCargo">{{ cargo.nome }}</li>
+      <ul id="cargos" v-if="página == 'Cargos'">
+        <li v-for="cargo in cargos" @click="clickCargo($event.target.innerText)">{{ cargo.nome }}</li>
       </ul>
 
-      <div id="calendario" v-if="page == 'Calendário'">Vai ter um calendário aqui</div>
+      <div id="calendário" v-if="página == 'Calendário'">Vai ter um calendário aqui</div>
 
-      <table id="funcionario" v-if="page == 'Funcionário'">
+      <table id="funcionário" v-if="página == 'Funcionário'">
         <tr class="f-header">
-          <th colspan="7">Funcionário: {{ funcionario }}</th>
+          <th colspan="7">Funcionário: {{ funcionário }}</th>
           <th colspan="7">Cargo: {{ cargo }}</th>
         </tr>
 
         <tr>
-          <th colspan="2">Mês: {{ mes }}</th>
+          <th colspan="2">Mês: {{ mês }}</th>
           <th colspan="2">1º Turno</th>
           <th rowspan="2">Intervalo</th>
           <th colspan="2">2º Turno</th>
@@ -64,16 +64,16 @@
           <th>{{ dia.numero }}</th>
           <th>{{ dia.semana }}</th>
           <td>{{ dia.t1entrada }}</td>
-          <td>{{ dia.t1saida }}</td>
+          <td>{{ dia.t1saída }}</td>
           <td>{{ dia.intervalo }}</td>
           <td>{{ dia.t2entrada }}</td>
-          <td>{{ dia.t2saida }}</td>
+          <td>{{ dia.t2saída }}</td>
           <td>{{ dia.t3entrada }}</td>
-          <td>{{ dia.t3saida }}</td>
+          <td>{{ dia.t3saída }}</td>
           <td>{{ dia.total }}</td>
           <td>{{ dia.total50 }}</td>
           <td>{{ dia.total100 }}</td>
-          <td>{{ dia.csabado }}</td>
+          <td>{{ dia.cSábado }}</td>
           <td>{{ dia.obs }}</td>
         </tr>
       </table>

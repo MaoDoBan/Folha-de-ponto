@@ -1,16 +1,16 @@
-#funcionario{
+#funcionário{
   border: 1px solid var(--cor-preto);
   width: 100%;
   border-collapse: collapse;
 }
 
-#funcionario th{
+#funcionário th{
   color: var(--cor-branco);
   border: 1px solid var(--cor-preto);
   background-color: var(--cor-item-conteúdo);
 }
 
-#funcionario td{
+#funcionário td{
   border: 1px solid var(--cor-preto);
   background-color: #c3c8d5;
 }
@@ -21,13 +21,13 @@
 }
 
 
-/*#funcionario{
+/*#funcionário{
   display: grid;
   grid-template-columns: repeat(14, 1fr);
   border: 1px solid var(--cor-preto);
 }
 
-#funcionario div{
+#funcionário div{
   border: 1px solid var(--cor-preto);
   padding: 3px;
   display: flex;
