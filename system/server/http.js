@@ -1,6 +1,6 @@
 import { createServer } from "http";
 import express from "express";
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 const app = express();
 const httpServer = createServer(app);
 const sockets = new Server(httpServer);
@@ -11,4 +11,4 @@ app.use(express.static(clientRootPath));
 app.get("/", (request, response) => {
     response.sendFile(clientRootPath + "/index.html");
 });
-export { httpServer, sockets };
+export { httpServer, sockets, Socket };

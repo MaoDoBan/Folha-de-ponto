@@ -1,6 +1,6 @@
 import { createServer } from "http";
 import express from "express";
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 import { ServerToClientEvents, ClientToServerEvents, InterServerEvents, SocketData } from "../types/socketio.js";
 
 const app = express();
@@ -16,4 +16,4 @@ app.get("/", (request, response) => {
   response.sendFile(clientRootPath+"/index.html");
 });
 
-export { httpServer, sockets };
+export { httpServer, sockets, Socket };
