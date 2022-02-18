@@ -18,10 +18,10 @@
       <div id="logo"> <div class="icon"></div> <div id="nome-empresa">LIMPATEC</div> </div>
 
       <div id="menu">
-        <div class="menu-item"> <button @click="clickItemMenu">Início</button>     </div>
-        <div class="menu-item"> <button @click="clickItemMenu">Cargos</button>     </div>
-        <div class="menu-item"> <button @click="clickItemMenu">Calendário</button> </div>
-        <div class="menu-item"> <button @click="clickItemMenu">Funcionário</button> </div>
+        <div class="menu-item"> <button @click="clickItemMenu($event.target.innerText)">Início</button>     </div>
+        <div class="menu-item"> <button @click="clickItemMenu($event.target.innerText)">Cargos</button>     </div>
+        <div class="menu-item"> <button @click="clickItemMenu($event.target.innerText)">Calendário</button> </div>
+        <div class="menu-item"> <button @click="clickItemMenu($event.target.innerText)">Funcionário</button> </div>
       </div>
     </div>
 
