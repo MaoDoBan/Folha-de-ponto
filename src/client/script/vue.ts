@@ -1,4 +1,5 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+import { getMêsFuncionário } from "./socket.js";
 
 
 export const app = createApp({
@@ -21,13 +22,20 @@ export const app = createApp({
     };
   },
   methods: {
-    clickItemMenu(página: string){
+    async clickItemMenu(página: string){
+      if(página != "Funcionário"){
+        this.página = página;
+        return;
+      }
+      ///desabilitar os botão de funcionário, pra habilitar só depois
+      this.dias = await getMêsFuncionário("Ele Mesmo", 2, 2022);
       this.página = página;
     },
     clickCargo(cargo: string){
       console.log(cargo + " foi clicado");
     },
     clickFuncionário(funcionário: string){
+      //this.dias = ;
       this.funcionário = funcionário;
     },
   }
