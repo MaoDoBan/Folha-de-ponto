@@ -1,4 +1,5 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+import { getMêsFuncionário } from "./socket.js";
 const páginasNomeToClass = {
     "Início": ".mi-inicio",
     "Cargos": ".mi-cargos",
@@ -19,7 +20,8 @@ export const app = createApp({
                 { nome: "Motorista E" },
                 { nome: "Operador de Retro" },
                 { nome: "Operadores Diversos" },
-                { nome: "Supervisor Operacional" }
+                { nome: "Supervisor Operacional" },
+                { nome: "Funcionário" }
             ]
         };
     },
@@ -33,8 +35,12 @@ export const app = createApp({
             próxima.classList.add("mi-selecionado");
             this.páginaAtual = próximaPágina;
         },
-        clickCargo(cargo) {
+        async clickCargo(cargo) {
             console.log(cargo + " foi clicado");
+            if (cargo == "Funcionário") {
+                this.dias = await getMêsFuncionário("Ele Mesmo", 2, 2022);
+                this.páginaAtual = cargo;
+            }
         },
         async clickFuncionário(funcionário) {
             ///desabilitar os botão de funcionário, pra habilitar só depois
