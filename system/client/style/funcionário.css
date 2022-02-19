@@ -23,7 +23,7 @@
 }
 
 #funcionário th{
-  font-size: 16px;
+  font-size: 14px;
   color: var(--cor-branco);
   /* border: 1px solid var(--cor-preto); */
   background-color: var(--cor-fundo-menu);

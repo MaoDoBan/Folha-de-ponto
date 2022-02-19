@@ -38,10 +38,12 @@
         <div class="header">
           <div>Cargo: {{ cargo }}</div>
           <div>Funcionário: {{ funcionário }}</div>
+          <div>Mês: {{ mês }}</div>
         </div>
         <table id="planilha">
           <tr>
-            <th colspan="2" style="width:8%">Mês: {{ mês }}</th>
+            <th rowspan="2" style="width:4%">Dia</th>
+            <th rowspan="2" style="width:4%">Sem</th>
             <th colspan="2" style="width:10%">1º Turno</th>
             <th rowspan="2" style="width:6%" >Intervalo</th>
             <th colspan="2" style="width:10%">2º Turno</th>
@@ -54,13 +56,12 @@
           </tr>
 
           <tr class="borda-bottom">
-            <th style="width:4%">Dia</th> <th>Sem</th>
             <th style="width:5%">Entrada</th> <th>Saída</th>
             <th style="width:5%">Entrada</th> <th>Saída</th>
             <th style="width:5%">Entrada</th> <th>Saída</th>
           </tr>
 
-          <tr v-for="dia in dias">
+          <tr class="borda-bottom" v-for="dia in dias">
             <th class="dia">{{ dia.numero }}</th>
             <th class="dia">{{ dia.semana }}</th>
             <td>{{ dia.t1entrada }}</td>
