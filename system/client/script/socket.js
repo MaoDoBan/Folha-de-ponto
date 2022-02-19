@@ -6,8 +6,3 @@ export function getMêsFuncionário(funcionário, mês, ano) {
         socket.once("mêsFuncionário", data => resolve(data));
     });
 }
-// export function getMêsFuncionário(funcionário: string, mês: number, ano: number){
-//   return new Promise((resolve) => {
-//     socket.emit("getMêsFuncionário", funcionário, mês, ano, resolve);
-//   });
-// }
