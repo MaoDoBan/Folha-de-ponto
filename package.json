@@ -7,8 +7,7 @@
     "build": "tsc",
     "test": "npm run build && node system/server/server.js",
     "start": "node system/server/server.js",
-    "dev": "nodemon ./src/server/server.ts",
-    "dev-start": "node --loader ts-node/esm ./src/server/server.ts"
+    "dev": "nodemon"
   },
   "dependencies": {
     "express": "^4.17.2",
@@ -20,7 +19,6 @@
     "@types/node": "^17.0.18",
     "@types/express": "^4.17.13",
     "@babel/types": "^7.17.0",
-    "ts-node": "^10.5.0",
     "nodemon": "^2.0.15"
   },
   "engines": {
@@ -33,7 +31,7 @@
     "ignore": ["referencias/*", "system/*"],
     "delay": 25000,
     "execMap": {
-      "ts": "tsc && node --loader ts-node/esm"
+      "js": "tsc && node"
     }
   }
 }
