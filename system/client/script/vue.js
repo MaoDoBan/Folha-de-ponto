@@ -1,9 +1,13 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
-import { getMêsFuncionário } from "./socket.js";
+const páginasNomeToClass = {
+    "Início": ".mi-inicio",
+    "Cargos": ".mi-cargos",
+    "Calendário": ".mi-calendario"
+};
 export const app = createApp({
     data() {
         return {
-            página: "Início",
+            páginaAtual: "Início",
             funcionário: "Ele Mesmo",
             cargo: "Motorista Teste",
             mês: "02/2022",
@@ -20,20 +24,21 @@ export const app = createApp({
         };
     },
     methods: {
-        async clickItemMenu(página) {
-            if (página != "Funcionário") {
-                this.página = página;
+        clickItemMenu(próximaPágina) {
+            if (this.páginaAtual == próximaPágina)
                 return;
-            }
-            ///desabilitar os botão de funcionário, pra habilitar só depois
-            this.dias = await getMêsFuncionário("Ele Mesmo", 2, 2022);
-            console.log("\nserá?:", this.dias);
-            this.página = página;
+            const atual = document.querySelector(páginasNomeToClass[this.páginaAtual]);
+            const próxima = document.querySelector(páginasNomeToClass[próximaPágina]);
+            atual.classList.remove("mi-selecionado");
+            próxima.classList.add("mi-selecionado");
+            this.páginaAtual = próximaPágina;
         },
         clickCargo(cargo) {
             console.log(cargo + " foi clicado");
         },
-        clickFuncionário(funcionário) {
+        async clickFuncionário(funcionário) {
+            ///desabilitar os botão de funcionário, pra habilitar só depois
+            // this.dias = await getMêsFuncionário("Ele Mesmo", 2, 2022);
             //this.dias = ;
             this.funcionário = funcionário;
         },
