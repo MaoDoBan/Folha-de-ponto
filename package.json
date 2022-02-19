@@ -31,9 +31,9 @@
   "license": "ISC",
   "nodemonConfig": {
     "ignore": ["referencias/*", "system/*"],
-    "delay": 2500,
+    "delay": 25000,
     "execMap": {
-      "ts": "node --loader ts-node/esm"
+      "ts": "tsc && node --loader ts-node/esm"
     }
   }
 }
