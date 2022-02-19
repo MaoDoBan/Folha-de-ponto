@@ -7,6 +7,7 @@
   <title>Folha de Ponto</title>
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/menu.css">
+  <link rel="stylesheet" href="style/início.css">
   <link rel="stylesheet" href="style/cargos.css">
   <link rel="stylesheet" href="style/funcionário.css">
   <script src="script/app.js" type="module"></script>
@@ -18,23 +19,24 @@
       <div id="logo"> <div class="icon"></div> <div id="nome-empresa">LIMPATEC</div> </div>
 
       <div id="menu">
-        <div class="menu-item"> <button @click="clickItemMenu($event.target.innerText)">Início</button>     </div>
-        <div class="menu-item"> <button @click="clickItemMenu($event.target.innerText)">Cargos</button>     </div>
-        <div class="menu-item"> <button @click="clickItemMenu($event.target.innerText)">Calendário</button> </div>
-        <div class="menu-item"> <button @click="clickItemMenu($event.target.innerText)">Funcionário</button> </div>
+        <div class="menu-item mi-inicio mi-selecionado" @click="clickItemMenu('Início')"     >Início</div>
+        <div class="menu-item mi-cargos"                @click="clickItemMenu('Cargos')"     >Cargos</div>
+        <!-- <div class="menu-item mi-sub1-item"   @click="clickItemMenu('Cargo')"      >Cargo</div>
+        <div class="menu-item mi-sub2-item"   @click="clickItemMenu('Funcionário')">Funcionário</div> -->
+        <div class="menu-item mi-calendario"            @click="clickItemMenu('Calendário')" >Calendário</div>
       </div>
     </div>
 
     <div class="content">
-      <div id="início" v-if="página == 'Início'">Vai ter uma página inicial aqui</div>
+      <div id="início" v-if="páginaAtual == 'Início'">LIMPATEC<br>Folha de Ponto</div>
 
-      <ul id="cargos" v-if="página == 'Cargos'">
+      <ul id="cargos" v-if="páginaAtual == 'Cargos'">
         <li v-for="cargo in cargos" @click="clickCargo($event.target.innerText)">{{ cargo.nome }}</li>
       </ul>
 
-      <div id="calendário" v-if="página == 'Calendário'">Vai ter um calendário aqui</div>
+      <div id="cargo" v-if="páginaAtual == 'Cargo'">Vai</div>
 
-      <table id="funcionário" v-if="página == 'Funcionário'">
+      <table id="funcionário" v-if="páginaAtual == 'Funcionário'">
         <tr class="f-header">
           <th colspan="7">Funcionário: {{ funcionário }}</th>
           <th colspan="7">Cargo: {{ cargo }}</th>
@@ -77,6 +79,9 @@
           <td>{{ dia.obs }}</td>
         </tr>
       </table>
+      
+      <div id="calendário" v-if="páginaAtual == 'Calendário'">Vai ter um calendário aqui</div>
+
     </div>
   </div>
 </body>

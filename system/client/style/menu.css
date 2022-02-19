@@ -21,13 +21,11 @@
 }
 
 #menu{
-  padding-top: 110px;
+  padding-top: 90px;
 }
 
 .menu-item{
-  margin-bottom: 20px;
-}
-.menu-item button{
+  margin-top: 20px;
   border: 0;
   padding: 0 0 0 99px;
   font-size: 44px;
@@ -35,7 +33,12 @@
   color: var(--cor-branco);
   width: 100%;
   background-color: var(--cor-item-menu);
+  box-sizing: border-box;
 }
-.menu-item button:hover{
+.menu-item:hover{
+  background-color: var(--cor-menu-selecionado);
+}
+
+.mi-selecionado{
   background-color: var(--cor-menu-selecionado);
 }

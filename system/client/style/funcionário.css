@@ -12,7 +12,7 @@
 
 #funcionário td{
   border: 1px solid var(--cor-preto);
-  background-color: #c3c8d5;
+  background-color: var(--cor-fundo-claro2);
 }
 
 .f-header th{
