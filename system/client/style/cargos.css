@@ -6,13 +6,16 @@
 }
 
 #cargos li{
+  color: var(--cor-branco);
   width: 15em;
   text-align: center;
   font-size: 30px;
   padding: 9px;
   margin-bottom: 10px;
-  background: var(--cor-item-conteúdo);
+  background: var(--cor-fundo-menu);
+  border: 2px solid var(--cor-fundo-claro);
 }
 #cargos li:hover{
-  background: var(--cor-item-ct-selecionado);
+  background: var(--cor-item-menu);
+  border: 2px solid var(--cor-item-menu);
 }

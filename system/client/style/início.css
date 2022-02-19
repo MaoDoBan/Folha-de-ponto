@@ -6,4 +6,6 @@
   text-align: center;
   height: 100%;
   padding-top: 180px;
+  box-sizing: border-box;
+  color: var(--cor-branco);
 }

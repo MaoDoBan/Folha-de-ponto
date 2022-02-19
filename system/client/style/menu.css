@@ -9,14 +9,14 @@
   margin-left: 10px;
 }
 #logo .icon{
-  background-color: var(--cor-vermelho);
+  /* background-color: var(--cor-vermelho); */
   width: 64px;
   height: 64px;
   margin: 12px;
 }
 #nome-empresa{
   font-size: 62px;
-  color: var(--cor-branco);
+  color: white;
   margin: auto 0;
 }
 
@@ -34,11 +34,17 @@
   width: 100%;
   background-color: var(--cor-item-menu);
   box-sizing: border-box;
+  border-top:    2px solid var(--cor-fundo-menu);
+  border-bottom: 2px solid var(--cor-fundo-menu);
 }
 .menu-item:hover{
-  background-color: var(--cor-menu-selecionado);
+  background-color: var(--cor-fundo-claro);
+  border-top:    2px solid var(--cor-fundo-claro);
+  border-bottom: 2px solid var(--cor-fundo-claro);
 }
 
 .mi-selecionado{
-  background-color: var(--cor-menu-selecionado);
+  background-color: var(--cor-fundo-claro);
+  border-top:    2px solid var(--cor-fundo-claro);
+  border-bottom: 2px solid var(--cor-fundo-claro);
 }

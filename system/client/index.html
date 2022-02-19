@@ -16,19 +16,17 @@
 <body>
   <div id="app">
     <div id="menu-bar">
-      <div id="logo"> <div class="icon"></div> <div id="nome-empresa">LIMPATEC</div> </div>
+      <div id="logo"> <img class="icon" src="./imagens/Icone_esfregao.png"></img> <div id="nome-empresa">LIMPATEC</div> </div>
 
       <div id="menu">
         <div class="menu-item mi-inicio mi-selecionado" @click="clickItemMenu('Início')"     >Início</div>
         <div class="menu-item mi-cargos"                @click="clickItemMenu('Cargos')"     >Cargos</div>
-        <!-- <div class="menu-item mi-sub1-item"   @click="clickItemMenu('Cargo')"      >Cargo</div>
-        <div class="menu-item mi-sub2-item"   @click="clickItemMenu('Funcionário')">Funcionário</div> -->
         <div class="menu-item mi-calendario"            @click="clickItemMenu('Calendário')" >Calendário</div>
       </div>
     </div>
 
     <div class="content">
-      <div id="início" v-if="páginaAtual == 'Início'">LIMPATEC<br>Folha de Ponto</div>
+      <div id="início" v-if="páginaAtual == 'Início'">LIMPATEC<br><br>Folha de Ponto</div>
 
       <ul id="cargos" v-if="páginaAtual == 'Cargos'">
         <li v-for="cargo in cargos" @click="clickCargo($event.target.innerText)">{{ cargo.nome }}</li>
@@ -36,49 +34,62 @@
 
       <div id="cargo" v-if="páginaAtual == 'Cargo'">Vai</div>
 
-      <table id="funcionário" v-if="páginaAtual == 'Funcionário'">
-        <tr class="f-header">
-          <th colspan="7">Funcionário: {{ funcionário }}</th>
-          <th colspan="7">Cargo: {{ cargo }}</th>
-        </tr>
+      <div id="funcionário" v-if="páginaAtual == 'Funcionário'">
+        <div class="header">
+          <div>Cargo: {{ cargo }}</div>
+          <div>Funcionário: {{ funcionário }}</div>
+        </div>
+        <table id="planilha">
+          <tr>
+            <th colspan="2" style="width:8%">Mês: {{ mês }}</th>
+            <th colspan="2" style="width:10%">1º Turno</th>
+            <th rowspan="2" style="width:6%" >Intervalo</th>
+            <th colspan="2" style="width:10%">2º Turno</th>
+            <th colspan="2" style="width:10%">3º Turno</th>
+            <th rowspan="2" style="width:5%" >TOTAL</th>
+            <th rowspan="2" style="width:5%" >TOTAL 50%</th>
+            <th rowspan="2" style="width:5%" >TOTAL 100%</th>
+            <th rowspan="2" style="width:10%">COMPENSAÇÃO SÁBADO</th>
+            <th rowspan="2">Observação</th>
+          </tr>
 
-        <tr>
-          <th colspan="2">Mês: {{ mês }}</th>
-          <th colspan="2">1º Turno</th>
-          <th rowspan="2">Intervalo</th>
-          <th colspan="2">2º Turno</th>
-          <th colspan="2">3º Turno</th>
-          <th rowspan="2">TOTAL</th>
-          <th rowspan="2">TOTAL 50%</th>
-          <th rowspan="2">TOTAL 100%</th>
-          <th rowspan="2">COMPENSAÇÃO SÁBADO</th>
-          <th rowspan="2">OBS</th>
-        </tr>
+          <tr class="borda-bottom">
+            <th style="width:4%">Dia</th> <th>Sem</th>
+            <th style="width:5%">Entrada</th> <th>Saída</th>
+            <th style="width:5%">Entrada</th> <th>Saída</th>
+            <th style="width:5%">Entrada</th> <th>Saída</th>
+          </tr>
 
-        <tr>
-          <th>Dia</th> <th>Sem</th>
-          <th>Entrada</th> <th>Saída</th>
-          <th>Entrada</th> <th>Saída</th>
-          <th>Entrada</th> <th>Saída</th>
-        </tr>
+          <tr v-for="dia in dias">
+            <th class="dia">{{ dia.numero }}</th>
+            <th class="dia">{{ dia.semana }}</th>
+            <td>{{ dia.t1entrada }}</td>
+            <td>{{ dia.t1saída }}</td>
+            <td>{{ dia.intervalo }}</td>
+            <td>{{ dia.t2entrada }}</td>
+            <td>{{ dia.t2saída }}</td>
+            <td>{{ dia.t3entrada }}</td>
+            <td>{{ dia.t3saída }}</td>
+            <td>{{ dia.total }}</td>
+            <td>{{ dia.total50 }}</td>
+            <td>{{ dia.total100 }}</td>
+            <td>{{ dia.cSábado }}</td>
+            <td>{{ dia.obs }}</td>
+          </tr>
 
-        <tr v-for="dia in dias">
-          <th>{{ dia.numero }}</th>
-          <th>{{ dia.semana }}</th>
-          <td>{{ dia.t1entrada }}</td>
-          <td>{{ dia.t1saída }}</td>
-          <td>{{ dia.intervalo }}</td>
-          <td>{{ dia.t2entrada }}</td>
-          <td>{{ dia.t2saída }}</td>
-          <td>{{ dia.t3entrada }}</td>
-          <td>{{ dia.t3saída }}</td>
-          <td>{{ dia.total }}</td>
-          <td>{{ dia.total50 }}</td>
-          <td>{{ dia.total100 }}</td>
-          <td>{{ dia.cSábado }}</td>
-          <td>{{ dia.obs }}</td>
-        </tr>
-      </table>
+          <tr>
+            <th colspan="9" id="total-mês">Totais no mês:</th>
+            <td>11</th>
+            <td>22</th>
+            <td>33</th>
+            <td>44</th>
+          </tr>
+        </table>
+        <div class="obs">
+          <div>Observações:</div>
+          <div id="grade-obs">Bah</div>
+        </div>
+      </div>
       
       <div id="calendário" v-if="páginaAtual == 'Calendário'">Vai ter um calendário aqui</div>
 
