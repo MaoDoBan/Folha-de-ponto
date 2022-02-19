@@ -24,7 +24,8 @@ export const app = createApp({
         { nome: "Motorista E" },
         { nome: "Operador de Retro" },
         { nome: "Operadores Diversos" },
-        { nome: "Supervisor Operacional" }
+        { nome: "Supervisor Operacional" },
+        { nome: "Funcionário" }
       ]
     };
   },
@@ -39,8 +40,12 @@ export const app = createApp({
       próxima.classList.add("mi-selecionado");
       this.páginaAtual = próximaPágina;
     },
-    clickCargo(cargo: string){
+    async clickCargo(cargo: string){
       console.log(cargo + " foi clicado");
+      if(cargo == "Funcionário"){
+        this.dias = await getMêsFuncionário("Ele Mesmo", 2, 2022);
+        this.páginaAtual = cargo;
+      }
     },
     async clickFuncionário(funcionário: string){
       ///desabilitar os botão de funcionário, pra habilitar só depois
