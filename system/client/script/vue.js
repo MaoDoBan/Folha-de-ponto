@@ -1,9 +1,9 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 import { getMêsFuncionário } from "./socket.js";
 const páginasNomeToClass = {
-    "Início": ".mi-inicio",
-    "Cargos": ".mi-cargos",
-    "Calendário": ".mi-calendario"
+    "Início": "#menu-inicio",
+    "Cargos": "#menu-cargos",
+    "Calendário": "#menu-calendario"
 };
 export const app = createApp({
     data() {
@@ -13,6 +13,7 @@ export const app = createApp({
             cargo: "Motorista Teste",
             mês: "02/2022",
             dias: {},
+            bah: "a",
             cargos: [
                 { nome: "Manutenção" },
                 { nome: "Motorista C" },
@@ -21,6 +22,7 @@ export const app = createApp({
                 { nome: "Operador de Retro" },
                 { nome: "Operadores Diversos" },
                 { nome: "Supervisor Operacional" },
+                { nome: "Assistente de Supervisor Operacional" },
                 { nome: "Funcionário" }
             ]
         };
@@ -31,8 +33,8 @@ export const app = createApp({
                 return;
             const atual = document.querySelector(páginasNomeToClass[this.páginaAtual]);
             const próxima = document.querySelector(páginasNomeToClass[próximaPágina]);
-            atual.classList.remove("mi-selecionado");
-            próxima.classList.add("mi-selecionado");
+            atual.classList.remove("ressaltado");
+            próxima.classList.add("ressaltado");
             this.páginaAtual = próximaPágina;
         },
         async clickCargo(cargo) {

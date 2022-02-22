@@ -4,9 +4,9 @@ import { getMêsFuncionário } from "./socket.js";
 
 type ItemMenu = "Início" | "Cargos" | "Calendário";
 const páginasNomeToClass = {
-  "Início":     ".mi-inicio",
-  "Cargos":     ".mi-cargos",
-  "Calendário": ".mi-calendario"
+  "Início":     "#menu-inicio",
+  "Cargos":     "#menu-cargos",
+  "Calendário": "#menu-calendario"
 };
 
 export const app = createApp({
@@ -17,6 +17,7 @@ export const app = createApp({
       cargo: "Motorista Teste",//remover isso, colocar alguma estrutura melhor
       mês: "02/2022",
       dias: {},
+      bah: "a",
       cargos: [
         { nome: "Manutenção" },
         { nome: "Motorista C" },
@@ -25,6 +26,7 @@ export const app = createApp({
         { nome: "Operador de Retro" },
         { nome: "Operadores Diversos" },
         { nome: "Supervisor Operacional" },
+        { nome: "Assistente de Supervisor Operacional" },
         { nome: "Funcionário" }
       ]
     };
@@ -36,8 +38,8 @@ export const app = createApp({
       const atual   = document.querySelector(páginasNomeToClass[this.páginaAtual as ItemMenu])!;
       const próxima = document.querySelector(páginasNomeToClass[próximaPágina])!;
 
-      atual.classList.remove("mi-selecionado");
-      próxima.classList.add("mi-selecionado");
+      atual.classList.remove("ressaltado");
+      próxima.classList.add("ressaltado");
       this.páginaAtual = próximaPágina;
     },
     async clickCargo(cargo: string){
