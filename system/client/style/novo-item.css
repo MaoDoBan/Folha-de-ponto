@@ -1,0 +1,40 @@
+.novo-item{
+  width: 500px;
+  display: flex;
+}
+
+.novo-item button{
+  width: 60px;
+  margin: 0;
+  border: 2px solid var(--cor-fundo-claro);
+}
+.novo-item button:hover{
+  background-color: var(--cor-item-menu);
+  border: 2px solid var(--cor-item-menu);
+}
+.novo-item .cancelar{
+  border-right: 0;
+}
+.novo-item .cancelar:hover{
+  border-right: 0;
+}
+.novo-item .confirmar{
+  border-left: 0;
+}
+.novo-item .confirmar:hover{
+  border-left: 0;
+}
+
+.novo-item input{
+  width: 384px;
+  height: 56px;
+  margin: 2px 0;
+  border: 0;
+  text-align: center;
+  font-size: 28px;
+  background-color: var(--cor-fundo-escuro-planilha);
+}
+.novo-item input:active, .novo-item input:focus{
+  outline: 0;
+  background-color: var(--cor-fundo-claro-planilha);
+}
