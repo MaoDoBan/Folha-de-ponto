@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="style/menu.css">
   <link rel="stylesheet" href="style/início.css">
   <link rel="stylesheet" href="style/cargos.css">
+  <link rel="stylesheet" href="style/botão-item.css">
+  <link rel="stylesheet" href="style/novo-item.css">
   <link rel="stylesheet" href="style/funcionário.css">
   <script src="script/app.js" type="module"></script>
 </head>
@@ -19,18 +21,26 @@
       <div id="logo"> <img class="icon" src="./imagens/Icone_esfregao.png"></img> <div id="nome-empresa">LIMPATEC</div> </div>
 
       <div id="menu">
-        <div class="menu-item mi-inicio mi-selecionado" @click="clickItemMenu('Início')"     >Início</div>
-        <div class="menu-item mi-cargos"                @click="clickItemMenu('Cargos')"     >Cargos</div>
-        <div class="menu-item mi-calendario"            @click="clickItemMenu('Calendário')" >Calendário</div>
+        <button id="menu-inicio" class="ressaltado" @click="clickItemMenu('Início')"    >Início</button>
+        <button id="menu-cargos"                    @click="clickItemMenu('Cargos')"    >Cargos</button>
+        <button id="menu-calendario"                @click="clickItemMenu('Calendário')">Calendário</button>
       </div>
     </div>
 
     <div class="content">
-      <div id="início" v-if="páginaAtual == 'Início'">LIMPATEC<br><br>Folha de Ponto</div>
+      <div id="início" v-if="páginaAtual == 'Início'">
+        <p>LIMPATEC<br><br>Folha de Ponto</p>
+      </div>
 
-      <ul id="cargos" v-if="páginaAtual == 'Cargos'">
-        <li v-for="cargo in cargos" @click="clickCargo($event.target.innerText)">{{ cargo.nome }}</li>
-      </ul>
+      <div id="cargos" v-if="páginaAtual == 'Cargos'">
+        <button class="botão-item" v-for="cargo in cargos" @click="clickCargo($event.target.innerText)"> <p>{{ cargo.nome }}</p> </button>
+        <button class="botão-item" v-if="bah == 'a'"> <img src="./imagens/add.png" alt=""> </button>
+        <div v-if="bah != 'nn'" class="novo-item">
+          <button class="cancelar"> <img src="./imagens/cancela.png" alt=""> </button>
+          <input type="text" placeholder="Cargo" maxlength="50">
+          <button class="confirmar"> <img src="./imagens/check.png" alt=""> </button>
+        </div>
+      </div>
 
       <div id="cargo" v-if="páginaAtual == 'Cargo'">Vai</div>
 
