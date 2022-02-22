@@ -24,7 +24,7 @@
   padding-top: 90px;
 }
 
-.menu-item{
+#menu button{
   margin-top: 20px;
   border: 0;
   padding: 0 0 0 99px;
@@ -37,14 +37,14 @@
   border-top:    2px solid var(--cor-fundo-menu);
   border-bottom: 2px solid var(--cor-fundo-menu);
 }
-.menu-item:hover{
+#menu button:hover{
   background-color: var(--cor-fundo-claro);
   border-top:    2px solid var(--cor-fundo-claro);
   border-bottom: 2px solid var(--cor-fundo-claro);
 }
 
-.mi-selecionado{
-  background-color: var(--cor-fundo-claro);
-  border-top:    2px solid var(--cor-fundo-claro);
-  border-bottom: 2px solid var(--cor-fundo-claro);
+#menu .ressaltado{
+  background-color: var(--cor-fundo-claro) !important;
+  border-top:    2px solid var(--cor-fundo-claro) !important;
+  border-bottom: 2px solid var(--cor-fundo-claro) !important;
 }
