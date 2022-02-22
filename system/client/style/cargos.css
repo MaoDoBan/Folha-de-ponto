@@ -1,21 +1,6 @@
 #cargos{
+  margin: 60px auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 94px;
-}
-
-#cargos li{
-  color: var(--cor-branco);
-  width: 15em;
-  text-align: center;
-  font-size: 30px;
-  padding: 9px;
-  margin-bottom: 10px;
-  background: var(--cor-fundo-menu);
-  border: 2px solid var(--cor-fundo-claro);
-}
-#cargos li:hover{
-  background: var(--cor-item-menu);
-  border: 2px solid var(--cor-item-menu);
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
