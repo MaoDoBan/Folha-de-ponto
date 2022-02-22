@@ -5,7 +5,12 @@
   justify-content: center;
   text-align: center;
   height: 100%;
-  padding-top: 180px;
+  padding-top: 151px;
   box-sizing: border-box;
   color: var(--cor-branco);
+}
+#início p{
+  background-color: var(--cor-item-menu);
+  height: 303px;
+  padding: 33px 44px;
 }
