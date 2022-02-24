@@ -2,4 +2,6 @@
 node_modules
 package-lock.json
 referencias
-database
+bancoDeDados.db
+bancoDeDados.db-shm
+bancoDeDados.db-wal
