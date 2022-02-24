@@ -1,8 +1,7 @@
 import DatabaseConstructor from "better-sqlite3";
-const database = new DatabaseConstructor("BancoDeDados.db"); //export 
+const database = new DatabaseConstructor("BancoDeDados.db");
 const sqlStringCheckTableExists = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name = ?;";
 export function initDatabase() {
-    // console.log("Iniciando banco de dados, aguarde...");
     const tabelaCargos = database.prepare(sqlStringCheckTableExists).get('Cargos');
     if (!tabelaCargos['count(*)']) {
         database.prepare("CREATE TABLE Cargos (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT);").run();
@@ -25,7 +24,4 @@ export function initDatabase() {
         console.log("Banco de dados: criei tabela FolhaDePonto");
     }
     return database;
-    // await delay(1100);
-    // console.log("Banco de dados iniciado.");
-    // return true;
 }
