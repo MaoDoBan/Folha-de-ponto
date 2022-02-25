@@ -1,6 +1,18 @@
 #cargos{
-  margin: 60px auto;
+  /* margin: 60px auto; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+.cargo{
+  display: flex;
+  align-items: center;
+}
+.cargo p{
+  width: 100%;
+}
+.cargo img{
+  width: 43px;
+  height: 43px;
 }
