@@ -2,18 +2,22 @@ import { httpServer } from "./http.js";
 
 
 import { initDatabase } from "./database/initDatabase.js";
-import { DB } from "./database/DB.js";
-const db = new DB(initDatabase());
+import { Dados } from "./database/Dados.js";
+const dados = new Dados(initDatabase());
 
-console.log("cargos: ", db.getCargos());
-const bah = db.addCargo("Motoristaço PA"); console.log("bah:",bah);
-console.log("cargos: ", db.getCargos());
-db.editCargo(1, "Motorista X");
-console.log("cargos: ", db.getCargos());
+// const bah = dados.database.prepare("SELECT * FROM Cargos WHERE nome = ?;").get('Pagode');
+// console.log("bah:",bah)
+
+//dados.addCargo("Manutenção");
+// console.log("cargos: ", db.getCargos());
+// const bah = dados.addCargo("Manutenção"); console.log("bah:",bah);
+// console.log("cargos: ", db.getCargos());
+//dados.editCargo(2, "Motorista C");
+// console.log("cargos: ", db.getCargos());
 
 
 import { iniciaSocketIo } from "./websocket.js";
-iniciaSocketIo();
+iniciaSocketIo(dados);
 
 const PORT = process.env.PORT || 3333;
 httpServer.listen(PORT, () => {
