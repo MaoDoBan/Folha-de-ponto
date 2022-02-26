@@ -16,100 +16,102 @@
   <script src="script/app.js" type="module"></script>
 </head>
 
-<body>
-  <div id="app">
-    <div id="menu-bar">
-      <div id="logo"> <img class="icon" src="./imagens/Icone_esfregao.png"></img> <div id="nome-empresa">LIMPATEC</div> </div>
+<body> <div id="app">
+  <div id="menu-bar">
+    <div id="logo"> <img class="icon" src="./imagens/Icone_esfregao.png"></img> <div id="nome-empresa">LIMPATEC</div> </div>
 
-      <div id="menu">
-        <button id="menu-inicio" class="ressaltado" @click="clickItemMenu('Início')"    >Início</button>
-        <button id="menu-cargos"                    @click="clickItemMenu('Cargos')"    >Cargos</button>
-        <button id="menu-calendario"                @click="clickItemMenu('Calendário')">Calendário</button>
-      </div>
-    </div>
-
-    <div class="content">
-      <div id="início" v-if="páginaAtual == 'Início'">
-        <p>LIMPATEC<br><br>Folha de Ponto</p>
-      </div>
-
-      <div id="cargos" v-if="páginaAtual == 'Cargos'">
-        <button v-for="cargo in cargos" class="botão-item" @click="clickCargo(cargo.id)">
-          <p>{{ cargo.nome }}</p>
-        </button>
-
-        <button class="botão-item" v-if="!input.cargo" @click="input.cargo = true"> <img src="./imagens/add.png"> </button>
-        <div v-if="input.cargo" class="novo-item">
-          <button class="cancelar"  @click="input.cargo = false"> <img src="./imagens/cancela.png"> </button>
-          <input id="input-cargo" type="text" placeholder="Cargo" maxlength="50">
-          <button class="confirmar" @click="confirmarAddCargo">   <img src="./imagens/check.png"> </button>
-        </div>
-      </div>
-
-      <div id="cargo" v-if="páginaAtual == 'Cargo'">Vai</div>
-
-      <div id="funcionário" v-if="páginaAtual == 'Funcionário'">
-        <div class="header">
-          <div>Cargo: {{ cargo }}</div>
-          <div>Funcionário: {{ funcionário }}</div>
-          <div>Mês: {{ mês }}</div>
-        </div>
-        <table id="planilha">
-          <tr>
-            <th rowspan="2" style="width:4%">Dia</th>
-            <th rowspan="2" style="width:4%">Sem</th>
-            <th colspan="2" style="width:10%">1º Turno</th>
-            <th rowspan="2" style="width:6%" >Intervalo</th>
-            <th colspan="2" style="width:10%">2º Turno</th>
-            <th colspan="2" style="width:10%">3º Turno</th>
-            <th rowspan="2" style="width:5%" >TOTAL</th>
-            <th rowspan="2" style="width:5%" >TOTAL 50%</th>
-            <th rowspan="2" style="width:5%" >TOTAL 100%</th>
-            <th rowspan="2" style="width:10%">COMPENSAÇÃO SÁBADO</th>
-            <th rowspan="2">Observação</th>
-          </tr>
-
-          <tr class="borda-bottom">
-            <th style="width:5%">Entrada</th> <th>Saída</th>
-            <th style="width:5%">Entrada</th> <th>Saída</th>
-            <th style="width:5%">Entrada</th> <th>Saída</th>
-          </tr>
-
-          <tr class="borda-bottom" v-for="dia in dias">
-            <th class="dia">{{ dia.numero }}</th>
-            <th class="dia">{{ dia.semana }}</th>
-            <td>{{ dia.t1entrada }}</td>
-            <td>{{ dia.t1saída }}</td>
-            <td>{{ dia.intervalo }}</td>
-            <td>{{ dia.t2entrada }}</td>
-            <td>{{ dia.t2saída }}</td>
-            <td>{{ dia.t3entrada }}</td>
-            <td>{{ dia.t3saída }}</td>
-            <td>{{ dia.total }}</td>
-            <td>{{ dia.total50 }}</td>
-            <td>{{ dia.total100 }}</td>
-            <td>{{ dia.cSábado }}</td>
-            <td>{{ dia.obs }}</td>
-          </tr>
-
-          <tr>
-            <th colspan="9" id="total-mês">Totais no mês:</th>
-            <td>11</th>
-            <td>22</th>
-            <td>33</th>
-            <td>44</th>
-          </tr>
-        </table>
-        <div class="obs">
-          <div>Observações:</div>
-          <div id="grade-obs">Bah</div>
-        </div>
-      </div>
-      
-      <div id="alterar" v-if="false"> <button> <img src="./imagens/edit.png"> </button> </div>
-
-      <div id="calendário" v-if="páginaAtual == 'Calendário'">Vai ter um calendário aqui</div>
+    <div id="menu">
+      <button id="menu-inicio" class="ressaltado" @click="clickItemMenu('Início')"    >Início</button>
+      <button id="menu-cargos"                    @click="clickItemMenu('Cargos')"    >Cargos</button>
+      <button id="menu-calendario"                @click="clickItemMenu('Calendário')">Calendário</button>
+      <button id="menu-logs"                      @click="clickItemMenu('Logs')"      >Logs</button>
     </div>
   </div>
-</body>
+
+  <div class="content">
+    <div id="início" v-if="páginaAtual == 'Início'">
+      <p>LIMPATEC<br><br>Folha de Ponto</p>
+    </div>
+
+    <div id="cargos" v-if="páginaAtual == 'Cargos'">
+      <button v-for="cargo in cargos" class="botão-item" @click="clickCargo(cargo)">
+        <p>{{ cargo.nome }}</p>
+      </button>
+
+      <button class="botão-item" v-if="!input.cargo" @click="input.cargo = true"> <img src="./imagens/add.png"> </button>
+      <div v-if="input.cargo" class="novo-item">
+        <button class="cancelar"  @click="input.cargo = false"> <img src="./imagens/cancela.png"> </button>
+        <input id="input-cargo" type="text" placeholder="Cargo" maxlength="50">
+        <button class="confirmar" @click="confirmarAddCargo">   <img src="./imagens/check.png"> </button>
+      </div>
+    </div>
+
+    <div id="cargo" v-if="páginaAtual == 'Cargo'">
+      <!--precisa de um botão de engrenagem no canto direito cima-->
+      <div class="header">Aqui vai ter o drop-down menu e o botão de engrenagem</div>
+    </div>
+
+    <div id="funcionário" v-if="páginaAtual == 'Funcionário'">
+      <div class="header">
+        <div>Cargo: {{ cargo }}</div>
+        <div>Funcionário: {{ funcionário }}</div>
+        <div>Mês: {{ mês }}</div>
+      </div>
+      <table id="planilha">
+        <tr>
+          <th rowspan="2" style="width:4%">Dia</th>
+          <th rowspan="2" style="width:4%">Sem</th>
+          <th colspan="2" style="width:10%">1º Turno</th>
+          <th rowspan="2" style="width:6%" >Intervalo</th>
+          <th colspan="2" style="width:10%">2º Turno</th>
+          <th colspan="2" style="width:10%">3º Turno</th>
+          <th rowspan="2" style="width:5%" >TOTAL</th>
+          <th rowspan="2" style="width:5%" >TOTAL 50%</th>
+          <th rowspan="2" style="width:5%" >TOTAL 100%</th>
+          <th rowspan="2" style="width:10%">COMPENSAÇÃO SÁBADO</th>
+          <th rowspan="2">Observação</th>
+        </tr>
+
+        <tr class="borda-bottom">
+          <th style="width:5%">Entrada</th> <th>Saída</th>
+          <th style="width:5%">Entrada</th> <th>Saída</th>
+          <th style="width:5%">Entrada</th> <th>Saída</th>
+        </tr>
+
+        <tr class="borda-bottom" v-for="dia in dias">
+          <th class="dia">{{ dia.numero }}</th>
+          <th class="dia">{{ dia.semana }}</th>
+          <td>{{ dia.t1entrada }}</td>
+          <td>{{ dia.t1saída }}</td>
+          <td>{{ dia.intervalo }}</td>
+          <td>{{ dia.t2entrada }}</td>
+          <td>{{ dia.t2saída }}</td>
+          <td>{{ dia.t3entrada }}</td>
+          <td>{{ dia.t3saída }}</td>
+          <td>{{ dia.total }}</td>
+          <td>{{ dia.total50 }}</td>
+          <td>{{ dia.total100 }}</td>
+          <td>{{ dia.cSábado }}</td>
+          <td>{{ dia.obs }}</td>
+        </tr>
+
+        <tr>
+          <th colspan="9" id="total-mês">Totais no mês:</th>
+          <td>11</th>
+          <td>22</th>
+          <td>33</th>
+          <td>44</th>
+        </tr>
+      </table>
+      <div class="obs">
+        <div>Observações:</div>
+        <div id="grade-obs">Bah</div>
+      </div>
+    </div>
+    
+    <div id="alterar" v-if="false"> <button> <img src="./imagens/edit.png"> </button> </div>
+
+    <div id="calendário" v-if="páginaAtual == 'Calendário'">Vai ter um calendário aqui</div>
+  </div>
+</div> </body>
 </html>
