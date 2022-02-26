@@ -1,18 +1,30 @@
+import { Cargo } from "./Cargo";
+import { Funcionário } from "./Funcionário";
+
+
 export interface ServerToClientEvents {
-  noArg: () => void;
-  basicEmit: (a: number, b: string, c: Buffer) => void;
-  withAck: (d: string, callback: (e: number) => void) => void;
-  mensagem: (texto: string) => void;
-  bah: (dados: any) => void;
-  mêsFuncionário: (dados: any) => void;
+  sendCargos:      (cargos: Cargo[]) => void;
+  resultAddCargo:  (status: string) => void;
+  resultEditCargo: (status: string) => void;
+  sendFuncionários:      (funcionários: Funcionário[]) => void;
+  resultAddFuncionário:  (status: string) => void;
+  resultEditFuncionário: (status: string) => void;
+  // mêsFuncionário: (dados: any) => void;
+  // noArg: () => void;
+  // basicEmit: (a: number, b: string, c: Buffer) => void;
+  // withAck: (d: string, callback: (e: number) => void) => void;
+  // mensagem: (texto: string) => void;
 }
 
 export interface ClientToServerEvents {
-  oi: () => void;
-  nah: () => number;
-  mensagem: (texto: string) => void;
-  bah: (dados: any) => void;
-  getMêsFuncionário: (funcionário: string, mês: number, ano: number) => void;
+  getCargos: () => void;
+  addCargo:  (nome: string) => void;
+  editCargo: (nome: string, id: number) => void;
+  getFuncionários: () => void;
+  addFuncionário:  (nomeFuncionário: string, idCargo: number) => void;
+  editFuncionário: (nome: string, id: number) => void;
+  // getMêsFuncionário: (funcionário: string, mês: number, ano: number) => void;
+  // mensagem: (texto: string) => void;
 }
 
 export interface InterServerEvents {
