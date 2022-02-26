@@ -1,11 +1,11 @@
 #cargos{
-  /* margin: 60px auto; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  margin-top: 60px;
 }
 
-.cargo{
+/* .cargo{
   display: flex;
   align-items: center;
 }
@@ -15,4 +15,4 @@
 .cargo img{
   width: 43px;
   height: 43px;
-}
+} */

@@ -34,25 +34,15 @@
       </div>
 
       <div id="cargos" v-if="páginaAtual == 'Cargos'">
-        <div class="head-edit"> <button> <img src="./imagens/edit.png"> </button> </div>
-
-        <div v-for="cargo in cargos">
-          <button v-if="true" class="botão-item cargo" @click="clickCargo(cargo.id)">
-            <p>{{ cargo.nome }}</p>
-            <img v-if="false" src="./imagens/edit.png">
-          </button>
-          <div v-if="true" class="novo-item">
-            <button v-if="true" class="cancelar" @click="cancelarEditCargo">   <img src="./imagens/cancela.png"> </button>
-            <input id="input-cargo" type="text" :value="cargo.nome" maxlength="50">
-            <button v-if="true" class="confirmar" @click="confirmarEditCargo"> <img src="./imagens/check.png"> </button>
-          </div>
-        </div>
+        <button v-for="cargo in cargos" class="botão-item" @click="clickCargo(cargo.id)">
+          <p>{{ cargo.nome }}</p>
+        </button>
 
         <button class="botão-item" v-if="!input.cargo" @click="input.cargo = true"> <img src="./imagens/add.png"> </button>
         <div v-if="input.cargo" class="novo-item">
-          <button class="cancelar" @click="input.cargo = false">  <img src="./imagens/cancela.png"> </button>
+          <button class="cancelar"  @click="input.cargo = false"> <img src="./imagens/cancela.png"> </button>
           <input id="input-cargo" type="text" placeholder="Cargo" maxlength="50">
-          <button class="confirmar" @click="confirmarAddCargo"> <img src="./imagens/check.png"> </button>
+          <button class="confirmar" @click="confirmarAddCargo">   <img src="./imagens/check.png"> </button>
         </div>
       </div>
 
@@ -116,6 +106,8 @@
         </div>
       </div>
       
+      <div id="alterar" v-if="false"> <button> <img src="./imagens/edit.png"> </button> </div>
+
       <div id="calendário" v-if="páginaAtual == 'Calendário'">Vai ter um calendário aqui</div>
     </div>
   </div>

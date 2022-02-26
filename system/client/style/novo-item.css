@@ -4,6 +4,7 @@
 }
 
 .novo-item button{
+  height: 60px;
   width: 60px;
   margin: 0;
   border: 2px solid var(--cor-fundo-claro);
