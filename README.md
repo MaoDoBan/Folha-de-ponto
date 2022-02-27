@@ -1,5 +1,5 @@
 # Folha de Ponto
-Registra os horários de entrada, almoço e saída dos funcionários de uma empresa do Guno (tenho que pegar o nome da empresa e a área de atuação)
+Registra os horários de entrada, almoço e saída dos funcionários da Limpatec
 
 
 
