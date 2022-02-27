@@ -18,9 +18,9 @@ export function addCargo(nome) {
 //     socket.once("resultEditCargo", status=>resolve(status));
 //   });
 // }
-export function getFuncionários() {
+export function getFuncionários(idCargo) {
     return new Promise(resolve => {
-        socket.emit("getFuncionários");
+        socket.emit("getFuncionários", idCargo);
         socket.once("sendFuncionários", funcionários => resolve(funcionários));
     });
 }
@@ -36,9 +36,10 @@ export function addFuncionário(nomeFuncionário, idCargo) {
 //     socket.once("resultAddFuncionário", status=>resolve(status));
 //   });
 // }
-// export function getMêsFuncionário(funcionário: string, mês: number, ano: number){
-//   return new Promise(resolve => {
-//     socket.emit("getMêsFuncionário", funcionário, mês, ano);
-//     socket.once("mêsFuncionário",    data => resolve(data));
-//   });
-// }
+///TODO: isso abaixo é placeholder
+export function getMêsFuncionário(funcionário, mês, ano) {
+    return new Promise(resolve => {
+        socket.emit("getMêsFuncionário", funcionário, mês, ano);
+        socket.once("mêsFuncionário", data => resolve(data));
+    });
+}

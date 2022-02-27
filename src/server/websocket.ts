@@ -1,5 +1,6 @@
 import { sockets, Socket } from "./http.js";
 import { Dados } from "./database/Dados.js";
+import { fevereiro } from "./calculaDia.js";////
 
 
 const clientesConectados: Socket[] = [];
@@ -28,9 +29,9 @@ export function iniciaSocketIo(dados: Dados){
     //   client.emit("resultEditCargo", );
     // });
 
-    // client.on("getFuncionários", ()=>{
-    //   client.emit("sendFuncionários", dados.getFuncionários());
-    // });
+    client.on("getFuncionários", ()=>{
+      client.emit("sendFuncionários", dados.getFuncionários());
+    });
     // client.on("addFuncionário", ()=>{
     //   //checar se o funcionário não é duplicado
     //   client.emit("resultAddFuncionário", );
@@ -43,11 +44,14 @@ export function iniciaSocketIo(dados: Dados){
     // client.on("", ()=>{
     //   ;
     // });
+
+
+    ///placeholder abaixo
+    client.on("getMêsFuncionário", (funcionário: string, mês: number, ano: number)=>{
+      console.log(`O ${client.id} ta querendo os dados do ${funcionário} do mês `+mês+"/"+ano);
+      client.emit("mêsFuncionário", fevereiro);
+    });
   });
 };
 
 
-    // client.on("getMêsFuncionário", (funcionário: string, mês: number, ano: number)=>{
-    //   console.log(`O ${client.id} ta querendo os dados do ${funcionário} do mês `+mês+"/"+ano);
-    //   client.emit("mêsFuncionário", fevereiro);
-    // });

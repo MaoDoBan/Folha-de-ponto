@@ -9,7 +9,7 @@ export interface ServerToClientEvents {
   sendFuncionários:      (funcionários: Funcionário[]) => void;
   resultAddFuncionário:  (status: string) => void;
   resultEditFuncionário: (status: string) => void;
-  // mêsFuncionário: (dados: any) => void;
+  mêsFuncionário: (dados: any) => void;///
   // noArg: () => void;
   // basicEmit: (a: number, b: string, c: Buffer) => void;
   // withAck: (d: string, callback: (e: number) => void) => void;
@@ -20,10 +20,10 @@ export interface ClientToServerEvents {
   getCargos: () => void;
   addCargo:  (nome: string) => void;
   editCargo: (nome: string, id: number) => void;
-  getFuncionários: () => void;
+  getFuncionários: (idCargo: number) => void;
   addFuncionário:  (nomeFuncionário: string, idCargo: number) => void;
   editFuncionário: (nome: string, id: number) => void;
-  // getMêsFuncionário: (funcionário: string, mês: number, ano: number) => void;
+  getMêsFuncionário: (funcionário: string, mês: number, ano: number) => void;///
   // mensagem: (texto: string) => void;
 }
 
