@@ -56,9 +56,9 @@ export class Dados{
     return "ok";
   }
   
-  // getFuncionários(){
-  //   return this.sqlGetListaCargos.all();
-  // }
+  getFuncionários(){
+    return []//this.sqlGetListaF.all();
+  }
   // addFuncionário(nome: string, idCargo: number){
   //   const jáTemEsteFuncionário = this.sqlGetFuncionárioDeNome.get(nome);
   //   //pegar nome do cargo pra enviar na resposta "false"
