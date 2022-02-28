@@ -11,10 +11,12 @@ const dias = await getMêsFuncionário("Ele Mesmo", 2, 2022); ////TODO: remover 
 export const app = createApp({
     data() {
         return {
-            páginaAtual: "Início",
-            funcionário: "Ele Mesmo",
-            cargo: "Motorista Teste",
-            mês: "02/2022",
+            atual: {
+                página: "Início",
+                funcionário: "Ele Mesmo",
+                cargo: "Motorista Teste",
+                mês: "02/2022",
+            },
             dias,
             input: {
                 cargo: false,
@@ -26,23 +28,23 @@ export const app = createApp({
     },
     methods: {
         clickItemMenu(próximaPágina) {
-            if (this.páginaAtual == próximaPágina)
+            if (this.atual.página == próximaPágina)
                 return;
-            const classPáginaAtual = páginasNomeToClass[this.páginaAtual];
+            const classPáginaAtual = páginasNomeToClass[this.atual.página];
             if (classPáginaAtual) {
-                const atual = document.querySelector(classPáginaAtual);
-                atual.classList.remove("ressaltado");
+                const botãoMenuPáginaAtual = document.querySelector(classPáginaAtual);
+                botãoMenuPáginaAtual.classList.remove("ressaltado");
             }
             const próxima = document.querySelector(páginasNomeToClass[próximaPágina]);
             próxima.classList.add("ressaltado");
-            this.páginaAtual = próximaPágina;
+            this.atual.página = próximaPágina;
         },
         async clickCargo(cargo) {
             const funcionários = await getFuncionários(cargo.id);
             console.log(cargo, "\n", funcionários);
             //se não existir funcionário com o id informado
             ;
-            this.páginaAtual = "Cargo";
+            this.atual.página = "Cargo";
             const itemMenuRessaltado = document.querySelector(".ressaltado");
             itemMenuRessaltado.classList.remove("ressaltado");
         },
@@ -58,7 +60,7 @@ export const app = createApp({
         },
         async clickFuncionários() {
             console.log("Todos os funcionários");
-            this.páginaAtual = "Funcionário"; ////
+            this.atual.página = "Funcionário"; ////
         },
         async clickFuncionário(funcionário) {
             console.log(funcionário, " foi clicado");
@@ -74,7 +76,7 @@ export const app = createApp({
 });
 // if(cargo == "Funcionário"){
 //   this.dias = await getMêsFuncionário("Ele Mesmo", 2, 2022);
-//   this.páginaAtual = cargo;
+//   this.atual.página = cargo;
 // }
 /*        { nome: "Manutenção" },
         { nome: "Motorista C" },

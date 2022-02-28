@@ -18,10 +18,12 @@ const dias = await getMêsFuncionário("Ele Mesmo", 2, 2022); ////TODO: remover 
 export const app = createApp({
   data(){
     return {
-      páginaAtual: "Início",//,"Funcionário"
-      funcionário: "Ele Mesmo",
-      cargo: "Motorista Teste",//remover isso, colocar alguma estrutura melhor
-      mês: "02/2022",
+      atual: {
+        página: "Início",//,"Funcionário"
+        funcionário: "Ele Mesmo",
+        cargo: "Motorista Teste",//remover isso, colocar alguma estrutura melhor
+        mês: "02/2022",
+      },
       dias,//dias: {},
       input: {
         cargo: false,
@@ -34,18 +36,18 @@ export const app = createApp({
 
   methods: {
     clickItemMenu(próximaPágina: ItemMenu){
-      if(this.páginaAtual == próximaPágina) return;
+      if(this.atual.página == próximaPágina) return;
 
-      const classPáginaAtual = páginasNomeToClass[this.páginaAtual as ItemMenu];
+      const classPáginaAtual = páginasNomeToClass[this.atual.página as ItemMenu];
       if(classPáginaAtual){
-        const atual = document.querySelector(classPáginaAtual)!;
-        atual.classList.remove("ressaltado");
+        const botãoMenuPáginaAtual = document.querySelector(classPáginaAtual)!;
+        botãoMenuPáginaAtual.classList.remove("ressaltado");
       }
       
       const próxima = document.querySelector(páginasNomeToClass[próximaPágina])!;
       próxima.classList.add("ressaltado");
 
-      this.páginaAtual = próximaPágina;
+      this.atual.página = próximaPágina;
     },
 
     async clickCargo(cargo: Cargo){
@@ -53,7 +55,7 @@ export const app = createApp({
       console.log(cargo, "\n", funcionários);
       //se não existir funcionário com o id informado
       ;
-      this.páginaAtual = "Cargo";
+      this.atual.página = "Cargo";
       const itemMenuRessaltado = document.querySelector(".ressaltado")!;
       itemMenuRessaltado.classList.remove("ressaltado");
     },
@@ -73,7 +75,7 @@ export const app = createApp({
     
     async clickFuncionários(){
       console.log("Todos os funcionários");
-      this.páginaAtual = "Funcionário";////
+      this.atual.página = "Funcionário";////
     },
 
     async clickFuncionário(funcionário: Funcionário){
@@ -93,7 +95,7 @@ export const app = createApp({
 
       // if(cargo == "Funcionário"){
       //   this.dias = await getMêsFuncionário("Ele Mesmo", 2, 2022);
-      //   this.páginaAtual = cargo;
+      //   this.atual.página = cargo;
       // }
 
 /*        { nome: "Manutenção" },
