@@ -4,16 +4,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="icon" type="image/x-icon" href="./imagens/Icone_esfregao.png">
   <title>Folha de Ponto</title>
+
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/menu.css">
   <link rel="stylesheet" href="style/início.css">
   <link rel="stylesheet" href="style/cargos.css">
-  <link rel="stylesheet" href="style/dropdown.css">
   <link rel="stylesheet" href="style/lista-botões.css">
   <link rel="stylesheet" href="style/botão-item.css">
   <link rel="stylesheet" href="style/novo-item.css">
   <link rel="stylesheet" href="style/header.css">
+  <link rel="stylesheet" href="style/dropdown.css">
+  <link rel="stylesheet" href="style/dropdown-list.css">
+  <link rel="stylesheet" href="style/dropdown-config.css">
   <link rel="stylesheet" href="style/funcionário.css">
   <script src="script/app.js" type="module"></script>
 </head>
@@ -31,11 +35,11 @@
   </div>
 
   <div class="content">
-    <div id="início" v-if="páginaAtual == 'Início'">
+    <div id="início" v-if="atual.página == 'Início'">
       <p>LIMPATEC<br><br>Folha de Ponto</p>
     </div>
 
-    <div id="cargos" class="lista-botões" v-if="páginaAtual == 'Cargos'">
+    <div id="cargos" class="lista-botões" v-if="atual.página == 'Cargos'">
       <button v-for="cargo in cargos" class="botão-item" @click="clickCargo(cargo)">
         <p>{{ cargo.nome }}</p>
       </button>
@@ -48,18 +52,24 @@
       </div>
     </div>
 
-    <div id="cargo" class="lista-botões" v-if="páginaAtual == 'Cargo'">
+    <div id="cargo" class="lista-botões" v-if="atual.página == 'Cargo'">
       <div class="header">
-        <div> <div class="dropdown">
-          <button class="dropdown-botão dd-cargo">Cargo: {{ cargo }}</button>
+        <div class="dropdown">
+          <button class="dropdown-botão dd-cargo">Cargo: {{ atual.cargo }}</button>
           <div class="dropdown-content">
-            <button v-for="cargo in cargos" class="a" @click="clickDropdownCargo(cargo)">
+            <button class="dd-item-lista" v-for="cargo in cargos" @click="clickDropdownCargo(cargo)">
               <p>{{ cargo.nome }}</p>
             </button>
           </div>
-        </div> </div>
+        </div>
           
-        <button class="engrenagem"> <img src="./imagens/engrenagem.png"> </button>
+        <div class="dropdown dd-config">
+          <button class="dropdown-botão engrenagem"> <img src="./imagens/engrenagem.png"> </button>
+          <div class="dropdown-content">
+            <input id="edit-cargo" type="text" :value="atual.cargo" :placeholder="atual.cargo" maxlength="50">
+            <button class="confirmar" @click="confirmarAddFuncionário"> <img src="./imagens/edit.png"> </button>
+          </div>
+        </div>
       </div>
 
       <button class="botão-item" @click="clickFuncionários"> <p>TODOS</p> </button>
@@ -75,12 +85,12 @@
       </div>
     </div>
 
-    <div id="funcionário" v-if="páginaAtual == 'Funcionário'">
+    <div id="funcionário" v-if="atual.página == 'Funcionário'">
       <div class="header">
         <div>
-          <button>Cargo: {{ cargo }}</button>
-          <button>Funcionário: {{ funcionário }}</button>
-          <button>Mês: {{ mês }}</button>
+          <button>Cargo: {{ atual.cargo }}</button>
+          <button>Funcionário: {{ atual.funcionário }}</button>
+          <button>Mês: {{ atual.mês }}</button>
         </div>
         <button class="engrenagem"> <img src="./imagens/engrenagem.png"> </button>
       </div>
@@ -139,9 +149,9 @@
     
     <div id="alterar" v-if="false"> <button> <img src="./imagens/edit.png"> </button> </div>
 
-    <div id="calendário" v-if="páginaAtual == 'Calendário'">Vai ter um calendário aqui</div>
+    <div id="calendário" v-if="atual.página == 'Calendário'">Vai ter um calendário aqui</div>
 
-    <div id="logs" v-if="páginaAtual == 'Logs'">Vai ter logs aqui</div>
+    <div id="logs" v-if="atual.página == 'Logs'">Vai ter logs aqui</div>
   </div>
 </div> </body>
 </html>
