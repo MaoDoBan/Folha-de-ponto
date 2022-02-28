@@ -43,6 +43,9 @@ export class Dados {
         this.sqlEditCargo.run(nome, id);
         return "ok";
     }
+    getFuncionários() {
+        return []; //this.sqlGetListaF.all();
+    }
 }
 /*
 bot.SQLsetUsuario = bot.sql.prepare("INSERT OR REPLACE INTO usuarios (user_id, msgs_pv, link, t_out_acesso_rpg)"+
