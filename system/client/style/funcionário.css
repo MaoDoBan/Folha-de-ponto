@@ -2,19 +2,6 @@
   width: 100%;
 }
 
-#funcionário .header{
-  margin-bottom: 12px;
-  display: flex;
-}
-#funcionário .header div{
-  font-size: 24px;
-  color: var(--cor-branco);
-  margin-right: 12px;
-  background-color: var(--cor-fundo-menu);
-  border: 1px solid var(--cor-preto);
-  padding: 6px;
-}
-
 #funcionário table{
   border: 1px solid var(--cor-preto);
   border-collapse: collapse;
@@ -42,10 +29,16 @@
   background-color: var(--cor-fundo-escuro-planilha);
 }
 
-#funcionário #total-mês{
-  font-size: 18px;
+#funcionário .sub-título{
+  padding: 3px 7px;
+  font-weight: bold;
+}
+/* #funcionário .sub-título p{
+  margin: 3px 7px;
+} */
+#funcionário tr .sub-título{
   text-align: right;
-  border-top: 1px solid var(--cor-preto);
+  font-size: 17px;
 }
 
 #funcionário .borda-bottom{
