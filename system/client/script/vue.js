@@ -1,11 +1,13 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
-import { addCargo, getCargos } from "./socket.js";
+import { addCargo, getCargos, getFuncionários, getMêsFuncionário } from "./socket.js";
 const páginasNomeToClass = {
     "Início": "#menu-inicio",
     "Cargos": "#menu-cargos",
-    "Calendário": "#menu-calendario"
+    "Calendário": "#menu-calendario",
+    "Logs": "#menu-logs"
 };
 const cargos = await getCargos();
+const dias = await getMêsFuncionário("Ele Mesmo", 2, 2022); ////TODO: remover ou mover isso depois
 export const app = createApp({
     data() {
         return {
@@ -13,48 +15,68 @@ export const app = createApp({
             funcionário: "Ele Mesmo",
             cargo: "Motorista Teste",
             mês: "02/2022",
-            dias: {},
-            input: { cargo: false },
-            cargos
+            dias,
+            input: {
+                cargo: false,
+                funcionário: false
+            },
+            cargos,
+            funcionários: []
         };
     },
     methods: {
         clickItemMenu(próximaPágina) {
             if (this.páginaAtual == próximaPágina)
                 return;
-            const atual = document.querySelector(páginasNomeToClass[this.páginaAtual]);
+            const classPáginaAtual = páginasNomeToClass[this.páginaAtual];
+            if (classPáginaAtual) {
+                const atual = document.querySelector(classPáginaAtual);
+                atual.classList.remove("ressaltado");
+            }
             const próxima = document.querySelector(páginasNomeToClass[próximaPágina]);
-            atual.classList.remove("ressaltado");
             próxima.classList.add("ressaltado");
             this.páginaAtual = próximaPágina;
         },
-        async clickCargo(id) {
-            console.log(`cargo ${id} foi clicado`);
+        async clickCargo(cargo) {
+            const funcionários = await getFuncionários(cargo.id);
+            console.log(cargo, "\n", funcionários);
+            //se não existir funcionário com o id informado
+            ;
+            this.páginaAtual = "Cargo";
+            const itemMenuRessaltado = document.querySelector(".ressaltado");
+            itemMenuRessaltado.classList.remove("ressaltado");
         },
         async confirmarAddCargo() {
             const input = document.querySelector("#input-cargo");
             const resposta = await addCargo(input.value);
-            if (resposta == "ok") {
-                this.input.cargo = false;
-                this.cargos = await getCargos();
+            if (resposta != "ok") {
+                alert("Server negou registrar este cargo! Motivo: " + resposta);
                 return;
             }
-            alert("Server negou registrar este cargo! Motivo: " + resposta);
+            this.input.cargo = false;
+            this.cargos = await getCargos();
+        },
+        async clickFuncionários() {
+            console.log("Todos os funcionários");
+            this.páginaAtual = "Funcionário"; ////
         },
         async clickFuncionário(funcionário) {
+            console.log(funcionário, " foi clicado");
             ///desabilitar os botão de funcionário, pra habilitar só depois
             // this.dias = await getMêsFuncionário("Ele Mesmo", 2, 2022);
             //this.dias = ;
-            this.funcionário = funcionário;
+            //this.funcionário = funcionário;
         },
+        confirmarAddFuncionário() {
+            console.log("confirmar add funcionário");
+        }
     }
 });
 // if(cargo == "Funcionário"){
 //   this.dias = await getMêsFuncionário("Ele Mesmo", 2, 2022);
 //   this.páginaAtual = cargo;
 // }
-/*
-        { nome: "Manutenção" },
+/*        { nome: "Manutenção" },
         { nome: "Motorista C" },
         { nome: "Motorista D" },
         { nome: "Motorista E" },
@@ -62,5 +84,4 @@ export const app = createApp({
         { nome: "Operadores Diversos" },
         { nome: "Supervisor Operacional" },
         { nome: "Assistente de Supervisor Operacional" },
-        { nome: "Funcionário" }
-*/ 
+        { nome: "Funcionário" }*/ 
