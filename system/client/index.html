@@ -9,9 +9,11 @@
   <link rel="stylesheet" href="style/menu.css">
   <link rel="stylesheet" href="style/início.css">
   <link rel="stylesheet" href="style/cargos.css">
+  <link rel="stylesheet" href="style/dropdown.css">
+  <link rel="stylesheet" href="style/lista-botões.css">
   <link rel="stylesheet" href="style/botão-item.css">
   <link rel="stylesheet" href="style/novo-item.css">
-  <link rel="stylesheet" href="style/head-edit.css">
+  <link rel="stylesheet" href="style/header.css">
   <link rel="stylesheet" href="style/funcionário.css">
   <script src="script/app.js" type="module"></script>
 </head>
@@ -33,7 +35,7 @@
       <p>LIMPATEC<br><br>Folha de Ponto</p>
     </div>
 
-    <div id="cargos" v-if="páginaAtual == 'Cargos'">
+    <div id="cargos" class="lista-botões" v-if="páginaAtual == 'Cargos'">
       <button v-for="cargo in cargos" class="botão-item" @click="clickCargo(cargo)">
         <p>{{ cargo.nome }}</p>
       </button>
@@ -46,36 +48,61 @@
       </div>
     </div>
 
-    <div id="cargo" v-if="páginaAtual == 'Cargo'">
-      <!--precisa de um botão de engrenagem no canto direito cima-->
-      <div class="header">Aqui vai ter o drop-down menu e o botão de engrenagem</div>
+    <div id="cargo" class="lista-botões" v-if="páginaAtual == 'Cargo'">
+      <div class="header">
+        <div> <div class="dropdown">
+          <button class="dropdown-botão dd-cargo">Cargo: {{ cargo }}</button>
+          <div class="dropdown-content">
+            <button v-for="cargo in cargos" class="a" @click="clickDropdownCargo(cargo)">
+              <p>{{ cargo.nome }}</p>
+            </button>
+          </div>
+        </div> </div>
+          
+        <button class="engrenagem"> <img src="./imagens/engrenagem.png"> </button>
+      </div>
+
+      <button class="botão-item" @click="clickFuncionários"> <p>TODOS</p> </button>
+      <button v-for="funcionário in funcionários" class="botão-item" @click="clickFuncionário(funcionário)">
+        <p>{{ funcionário.nome }}</p>
+      </button>
+
+      <button class="botão-item" v-if="!input.funcionário" @click="input.funcionário = true"> <img src="./imagens/add.png"> </button>
+      <div v-if="input.funcionário" class="novo-item">
+        <button class="cancelar"  @click="input.funcionário = false"> <img src="./imagens/cancela.png"> </button>
+        <input id="input-funcionário" type="text" placeholder="Funcionário" maxlength="50">
+        <button class="confirmar" @click="confirmarAddFuncionário">   <img src="./imagens/check.png"> </button>
+      </div>
     </div>
 
     <div id="funcionário" v-if="páginaAtual == 'Funcionário'">
       <div class="header">
-        <div>Cargo: {{ cargo }}</div>
-        <div>Funcionário: {{ funcionário }}</div>
-        <div>Mês: {{ mês }}</div>
+        <div>
+          <button>Cargo: {{ cargo }}</button>
+          <button>Funcionário: {{ funcionário }}</button>
+          <button>Mês: {{ mês }}</button>
+        </div>
+        <button class="engrenagem"> <img src="./imagens/engrenagem.png"> </button>
       </div>
       <table id="planilha">
         <tr>
-          <th rowspan="2" style="width:4%">Dia</th>
-          <th rowspan="2" style="width:4%">Sem</th>
-          <th colspan="2" style="width:10%">1º Turno</th>
-          <th rowspan="2" style="width:6%" >Intervalo</th>
-          <th colspan="2" style="width:10%">2º Turno</th>
-          <th colspan="2" style="width:10%">3º Turno</th>
-          <th rowspan="2" style="width:5%" >TOTAL</th>
-          <th rowspan="2" style="width:5%" >TOTAL 50%</th>
-          <th rowspan="2" style="width:5%" >TOTAL 100%</th>
-          <th rowspan="2" style="width:10%">COMPENSAÇÃO SÁBADO</th>
-          <th rowspan="2">Observação</th>
+          <th rowspan="2" style="width:5%">Dia</th>
+          <th rowspan="2" style="width:5%">Sem</th>
+          <th colspan="2" style="width:14%">1º Turno</th>
+          <th rowspan="2" style="width:7%" >Intervalo</th>
+          <th colspan="2" style="width:14%">2º Turno</th>
+          <th colspan="2" style="width:14%">3º Turno</th>
+          <th rowspan="2" style="width:8%" >TOTAL</th>
+          <th rowspan="2" style="width:8%" >TOTAL 50%</th>
+          <th rowspan="2" style="width:8%" >TOTAL 100%</th>
+          <th rowspan="2" style="width:11%">COMPENSAÇÃO SÁBADO</th>
+          <th rowspan="2">Obs</th>
         </tr>
 
         <tr class="borda-bottom">
-          <th style="width:5%">Entrada</th> <th>Saída</th>
-          <th style="width:5%">Entrada</th> <th>Saída</th>
-          <th style="width:5%">Entrada</th> <th>Saída</th>
+          <th style="width:7%">Entrada</th> <th>Saída</th>
+          <th style="width:7%">Entrada</th> <th>Saída</th>
+          <th style="width:7%">Entrada</th> <th>Saída</th>
         </tr>
 
         <tr class="borda-bottom" v-for="dia in dias">
@@ -96,15 +123,16 @@
         </tr>
 
         <tr>
-          <th colspan="9" id="total-mês">Totais no mês:</th>
+          <th colspan="9" class="sub-título"> <p>Totais no mês:</p> </th>
           <td>11</th>
           <td>22</th>
           <td>33</th>
           <td>44</th>
+          <th></th>
         </tr>
       </table>
       <div class="obs">
-        <div>Observações:</div>
+        <div class="sub-título"> <p>Observações:</p> </div>
         <div id="grade-obs">Bah</div>
       </div>
     </div>
@@ -112,6 +140,8 @@
     <div id="alterar" v-if="false"> <button> <img src="./imagens/edit.png"> </button> </div>
 
     <div id="calendário" v-if="páginaAtual == 'Calendário'">Vai ter um calendário aqui</div>
+
+    <div id="logs" v-if="páginaAtual == 'Logs'">Vai ter logs aqui</div>
   </div>
 </div> </body>
 </html>
