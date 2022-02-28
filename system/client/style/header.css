@@ -1,0 +1,28 @@
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.header div{
+  display: flex;
+}
+
+/* .header div button{
+  font-size: 24px;
+  color: var(--cor-branco);
+  background-color: var(--cor-fundo-menu);
+    border: 1px solid var(--cor-preto);
+  padding: 8px;
+  margin-right: 12px;
+} */
+
+.header img{
+  height: 36px;
+  /* padding: 2px; */
+}
+
+.header .engrenagem{
+  padding: 6px;
+}
