@@ -5,10 +5,6 @@
   margin-bottom: 12px;
 }
 
-.header div{
-  display: flex;
-}
-
 /* .header div button{
   font-size: 24px;
   color: var(--cor-branco);
@@ -17,12 +13,3 @@
   padding: 8px;
   margin-right: 12px;
 } */
-
-.header img{
-  height: 36px;
-  /* padding: 2px; */
-}
-
-.header .engrenagem{
-  padding: 6px;
-}
