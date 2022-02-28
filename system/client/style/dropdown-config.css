@@ -1,0 +1,34 @@
+.dd-config .dropdown-content{
+  right: 49px;
+  top: 0;
+  border: 1px solid var(--cor-preto);
+  box-shadow: -8px 4px 16px 0px rgba(0,0,0,0.2);
+}
+.dd-config:hover .dropdown-content{
+  display: flex;
+}
+
+.dd-config img{
+  height: 36px;
+}
+
+.engrenagem{
+  padding: 6px;
+}
+
+.dd-config input{
+  width: 380px;
+  height: 48px;
+  border: 0;
+  text-align: center;
+  font-size: 24px;
+  background-color: var(--cor-fundo-escuro-planilha);
+}
+.dd-config input:active, .dd-config input:focus{
+  outline: 0;
+  background-color: var(--cor-fundo-claro-planilha);
+}
+
+.dd-config .confirmar:hover{
+  background-color: var(--cor-item-menu);
+}

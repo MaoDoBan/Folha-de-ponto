@@ -1,0 +1,16 @@
+.dd-item-lista{
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  padding: 3px;
+  background-color: var(--cor-item-menu);
+  border: 1px solid var(--cor-item-menu);
+}
+.dd-item-lista:hover{
+  background-color: var(--cor-fundo-menos-claro);
+  border: 1px solid var(--cor-fundo-menu);
+}
+
+.dd-item-lista p{
+  white-space: nowrap;
+}
