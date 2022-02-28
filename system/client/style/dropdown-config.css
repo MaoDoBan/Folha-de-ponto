@@ -29,6 +29,9 @@
   background-color: var(--cor-fundo-claro-planilha);
 }
 
-.dd-config .confirmar:hover{
+.dd-config .confirmar{
   background-color: var(--cor-item-menu);
+}
+.dd-config .confirmar:hover{
+  background-color: var(--cor-fundo-menos-claro);
 }
