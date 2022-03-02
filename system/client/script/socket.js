@@ -1,43 +1,43 @@
 import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 export const socket = io();
-export function getCargos() {
+export function postGetCargos() {
     return new Promise(resolve => {
         socket.emit("getCargos");
         socket.once("sendCargos", cargos => resolve(cargos));
     });
 }
-export function addCargo(nome) {
+export function postAddCargo(nome) {
     return new Promise(resolve => {
         socket.emit("addCargo", nome);
         socket.once("resultAddCargo", status => resolve(status));
     });
 }
-// export function editCargo(nome: string, id: number): Promise<string>{
-//   return new Promise(resolve => {
-//     socket.emit("editCargo", nome, id);
-//     socket.once("resultEditCargo", status=>resolve(status));
-//   });
-// }
-export function getFuncionários(idCargo) {
+export function postEditCargo(id, nome) {
+    return new Promise(resolve => {
+        socket.emit("editCargo", id, nome);
+        socket.once("resultEditCargo", status => resolve(status));
+    });
+}
+export function postGetFuncionários(idCargo) {
     return new Promise(resolve => {
         socket.emit("getFuncionários", idCargo);
         socket.once("sendFuncionários", funcionários => resolve(funcionários));
     });
 }
-export function addFuncionário(nomeFuncionário, idCargo) {
+export function postAddFuncionário(nomeFuncionário, idCargo) {
     return new Promise(resolve => {
         socket.emit("addFuncionário", nomeFuncionário, idCargo);
         socket.once("resultAddFuncionário", status => resolve(status));
     });
 }
-// export function editFuncionário(nome: string, id: number): Promise<string>{
-//   return new Promise(resolve => {
-//     socket.emit("editFuncionário", nome, id);
-//     socket.once("resultAddFuncionário", status=>resolve(status));
-//   });
-// }
+export function postEditFuncionário(id, nome) {
+    return new Promise(resolve => {
+        socket.emit("editFuncionário", id, nome);
+        socket.once("resultEditFuncionário", status => resolve(status));
+    });
+}
 ///TODO: isso abaixo é placeholder
-export function getMêsFuncionário(funcionário, mês, ano) {
+export function postGetMêsFuncionário(funcionário, mês, ano) {
     return new Promise(resolve => {
         socket.emit("getMêsFuncionário", funcionário, mês, ano);
         socket.once("mêsFuncionário", data => resolve(data));

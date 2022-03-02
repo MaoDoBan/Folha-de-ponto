@@ -7,47 +7,47 @@ import { Funcionário } from "../../types/Funcionário.js";
 export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
 
 
-export function getCargos(): Promise<Cargo[]>{
+export function postGetCargos(): Promise<Cargo[]>{
   return new Promise(resolve => {
     socket.emit("getCargos");
-    socket.once("sendCargos", cargos=>resolve(cargos));
+    socket.once("sendCargos", cargos => resolve(cargos));
   });
 }
-export function addCargo(nome: string): Promise<string>{
+export function postAddCargo(nome: string): Promise<string>{
   return new Promise(resolve => {
     socket.emit("addCargo", nome);
-    socket.once("resultAddCargo", status=>resolve(status));
+    socket.once("resultAddCargo", status => resolve(status));
   });
 }
-// export function editCargo(nome: string, id: number): Promise<string>{
-//   return new Promise(resolve => {
-//     socket.emit("editCargo", nome, id);
-//     socket.once("resultEditCargo", status=>resolve(status));
-//   });
-// }
-
-export function getFuncionários(idCargo: number): Promise<Funcionário[]>{
+export function postEditCargo(id: number, nome: string): Promise<string>{
   return new Promise(resolve => {
-    socket.emit("getFuncionários", idCargo);
-    socket.once("sendFuncionários", funcionários=>resolve(funcionários));
+    socket.emit("editCargo", id, nome);
+    socket.once("resultEditCargo", status => resolve(status));
   });
 }
-export function addFuncionário(nomeFuncionário: string, idCargo: number): Promise<string>{
+
+export function postGetFuncionários(idCargo: number): Promise<Funcionário[]>{
+  return new Promise(resolve => {
+    socket.emit("getFuncionários",  idCargo);
+    socket.once("sendFuncionários", funcionários => resolve(funcionários));
+  });
+}
+export function postAddFuncionário(nomeFuncionário: string, idCargo: number): Promise<string>{
   return new Promise(resolve => {
     socket.emit("addFuncionário", nomeFuncionário, idCargo);
-    socket.once("resultAddFuncionário", status=>resolve(status));
+    socket.once("resultAddFuncionário", status => resolve(status));
   });
 }
-// export function editFuncionário(nome: string, id: number): Promise<string>{
-//   return new Promise(resolve => {
-//     socket.emit("editFuncionário", nome, id);
-//     socket.once("resultAddFuncionário", status=>resolve(status));
-//   });
-// }
+export function postEditFuncionário(id: number, nome: string): Promise<string>{
+  return new Promise(resolve => {
+    socket.emit("editFuncionário", id, nome);
+    socket.once("resultEditFuncionário", status => resolve(status));
+  });
+}
 
 
 ///TODO: isso abaixo é placeholder
-export function getMêsFuncionário(funcionário: string, mês: number, ano: number){
+export function postGetMêsFuncionário(funcionário: string, mês: number, ano: number){
   return new Promise(resolve => {
     socket.emit("getMêsFuncionário", funcionário, mês, ano);
     socket.once("mêsFuncionário",    data => resolve(data));
