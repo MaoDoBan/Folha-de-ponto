@@ -19,27 +19,25 @@ export function iniciaSocketIo(dados: Dados){
     });
 
     client.on("getCargos", ()=>{
+      /// se não existir funcionário com o id informado ????? isso é pro server?
       client.emit("sendCargos", dados.getCargos());
     });
     client.on("addCargo", nome => {
       client.emit("resultAddCargo", dados.addCargo(nome));
     });
-    // client.on("editCargo", ()=>{
-    //   
-    //   client.emit("resultEditCargo", );
-    // });
-
-    client.on("getFuncionários", ()=>{
-      client.emit("sendFuncionários", dados.getFuncionários());
+    client.on("editCargo", (id, nome) => {
+      client.emit("resultEditCargo", dados.editCargo(id, nome));
     });
-    // client.on("addFuncionário", ()=>{
-    //   //checar se o funcionário não é duplicado
-    //   client.emit("resultAddFuncionário", );
-    // });
-    // client.on("editFuncionário", ()=>{
-    //   //checar se o funcionário não é duplicado
-    //   client.emit("resultEditFuncionário", );
-    // });
+
+    client.on("getFuncionários", idCargo => {
+      client.emit("sendFuncionários", dados.getFuncionários(idCargo));
+    });
+    client.on("addFuncionário", (nomeFuncionário, idCargo)=>{
+      client.emit("resultAddFuncionário", dados.addFuncionário(nomeFuncionário, idCargo));
+    });
+    client.on("editFuncionário", (id, nome)=>{
+      client.emit("resultEditFuncionário", dados.editFuncionário(id, nome));
+    });
 
     // client.on("", ()=>{
     //   ;
