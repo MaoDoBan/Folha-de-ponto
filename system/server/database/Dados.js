@@ -75,7 +75,6 @@ export const dados = {
             return "contém ;";
         if (funcionárioExiste) {
             const cargo = this.sqlGetCargoDeId.get(funcionárioExiste.id_cargo);
-            console.log("|||", funcionárioExiste, cargo);
             return `já existe um funcionário com o nome ${nome} no cargo ` + cargo.nome;
         }
         this.sqlAddFuncionário.run(nome, idCargo);
@@ -96,8 +95,3 @@ export const dados = {
         return "ok";
     }
 };
-/*
-bot.SQLsetUsuario = bot.sql.prepare("INSERT OR REPLACE INTO usuarios (user_id, msgs_pv, link, t_out_acesso_rpg)"+
-                                                      " VALUES (@user_id, @msgs_pv, @link, @t_out_acesso_rpg);"),
-bot.setUsuario = function(usu){ bot.SQLsetUsuario.run(usu); }
-*/ 
