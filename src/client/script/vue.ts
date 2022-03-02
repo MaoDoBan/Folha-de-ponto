@@ -19,8 +19,8 @@ export const app = createApp({
     return {
       atual: {
         página: "Início",
-        cargo: {id: 0, nome: ""},
-        funcionário: {id: 0, nome: "", id_cargo: 0},
+        cargo: {id: 0, nome: "É"},
+        funcionário: {id: 0, nome: "Jão", id_cargo: 0},
         mês: "02/2022",
       },
       dias: {},
@@ -29,7 +29,8 @@ export const app = createApp({
         funcionário: false
       },
       cargos,
-      funcionários: []
+      funcionários: [],
+      meses: ["01/2022", "02/2022", "03/2022"]
     };
   },
 
@@ -98,17 +99,19 @@ export const app = createApp({
     },
 
     async clickFuncionário(funcionário: Funcionário){
-      console.log(funcionário," foi clicado");
-
+      this.atual.funcionário = funcionário;
       
       this.dias = await server.postGetMêsFuncionário("Ele Mesmo", 2, 2022); ////TODO: remover ou mover isso depois
-      this.funcionário = funcionário;
       this.atual.página = "Funcionário";
     },
     
-    async clickFuncionários(){
+    async clickFuncionários(){///
       console.log("Todos os funcionários");
-      this.atual.página = "Funcionários";////
+      this.atual.página = "Funcionários";
+    },
+
+    async clickMês(){
+      console.log("clicou em um mês ai");
     }
   }
 });
