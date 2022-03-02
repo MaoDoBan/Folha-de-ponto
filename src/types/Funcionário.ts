@@ -1,5 +1,5 @@
 export interface Funcionário{
   id: number;
   nome: string;
-  idCargo: number;
+  id_cargo: number;
 }
