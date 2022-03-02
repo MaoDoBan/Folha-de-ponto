@@ -11,7 +11,7 @@ export function initDatabase() {
     }
     const tabelaFuncionários = database.prepare(sqlStringCheckTableExists).get('Funcionarios');
     if (!tabelaFuncionários['count(*)']) {
-        database.prepare("CREATE TABLE Funcionarios (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, cargo_id INTEGER NOT NULL REFERENCES Cargos(id));").run();
+        database.prepare("CREATE TABLE Funcionarios (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, id_cargo INTEGER NOT NULL REFERENCES Cargos(id));").run();
         console.log("Banco de dados: criei tabela Funcionarios");
     }
     const tabelaFolhaDePonto = database.prepare(sqlStringCheckTableExists).get('FolhaDePonto');
