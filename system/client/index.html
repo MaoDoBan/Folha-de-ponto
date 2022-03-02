@@ -55,9 +55,9 @@
     <div id="cargo" class="lista-botões" v-if="atual.página == 'Cargo'">
       <div class="header">
         <div class="dropdown">
-          <button class="dropdown-botão dd-cargo">Cargo: {{ atual.cargo }}</button>
+          <button class="dropdown-botão dd-cargo">Cargo: {{ atual.cargo.nome }}</button>
           <div class="dropdown-content">
-            <button class="dd-item-lista" v-for="cargo in cargos" @click="clickDropdownCargo(cargo)">
+            <button class="dd-item-lista" v-for="cargo in cargos" @click="clickCargo(cargo)">
               <p>{{ cargo.nome }}</p>
             </button>
           </div>
@@ -66,8 +66,8 @@
         <div class="dropdown dd-config">
           <button class="dropdown-botão engrenagem"> <img src="./imagens/engrenagem.png"> </button>
           <div class="dropdown-content">
-            <input id="edit-cargo" type="text" :value="atual.cargo" :placeholder="atual.cargo" maxlength="50">
-            <button class="confirmar" @click="confirmarAddFuncionário"> <img src="./imagens/edit.png"> </button>
+            <input id="edit-cargo" type="text" :value="atual.cargo.nome" :placeholder="atual.cargo.nome" maxlength="50">
+            <button class="confirmar" @click="confirmarEditCargo"> <img src="./imagens/edit.png"> </button>
           </div>
         </div>
       </div>
@@ -88,12 +88,13 @@
     <div id="funcionário" v-if="atual.página == 'Funcionário'">
       <div class="header">
         <div>
-          <button>Cargo: {{ atual.cargo }}</button>
+          <button>Cargo: {{ atual.cargo.nome }}</button>
           <button>Funcionário: {{ atual.funcionário }}</button>
           <button>Mês: {{ atual.mês }}</button>
         </div>
         <button class="engrenagem"> <img src="./imagens/engrenagem.png"> </button>
       </div>
+
       <table id="planilha">
         <tr>
           <th rowspan="2" style="width:5%">Dia</th>
@@ -141,13 +142,14 @@
           <th></th>
         </tr>
       </table>
+
       <div class="obs">
         <div class="sub-título"> <p>Observações:</p> </div>
         <div id="grade-obs">Bah</div>
       </div>
     </div>
     
-    <div id="alterar" v-if="false"> <button> <img src="./imagens/edit.png"> </button> </div>
+    <div id="funcionários" v-if="atual.página == 'Funcionários'">Em progresso</div>
 
     <div id="calendário" v-if="atual.página == 'Calendário'">Vai ter um calendário aqui</div>
 
