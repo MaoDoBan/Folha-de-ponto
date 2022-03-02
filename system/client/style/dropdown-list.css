@@ -14,3 +14,7 @@
 .dd-item-lista p{
   white-space: nowrap;
 }
+
+.dd-lista .dropdown-content{
+  top: 49px;
+}

@@ -29,7 +29,7 @@
     <div id="menu">
       <button id="menu-inicio" class="ressaltado" @click="clickItemMenu('Início')"    >Início</button>
       <button id="menu-cargos"                    @click="clickItemMenu('Cargos')"    >Cargos</button>
-      <button id="menu-calendario"                @click="clickItemMenu('Calendário')">Calendário</button>
+      <!--button id="menu-calendario"                @click="clickItemMenu('Calendário')">Calendário</button-->
       <button id="menu-logs"                      @click="clickItemMenu('Logs')"      >Logs</button>
     </div>
   </div>
@@ -54,8 +54,8 @@
 
     <div id="cargo" class="lista-botões" v-if="atual.página == 'Cargo'">
       <div class="header">
-        <div class="dropdown">
-          <button class="dropdown-botão dd-cargo">Cargo: {{ atual.cargo.nome }}</button>
+        <div class="dropdown dd-lista">
+          <button class="dropdown-botão">Cargo: {{ atual.cargo.nome }}</button>
           <div class="dropdown-content">
             <button class="dd-item-lista" v-for="cargo in cargos" @click="clickCargo(cargo)">
               <p>{{ cargo.nome }}</p>
@@ -87,12 +87,40 @@
 
     <div id="funcionário" v-if="atual.página == 'Funcionário'">
       <div class="header">
-        <div>
-          <button>Cargo: {{ atual.cargo.nome }}</button>
-          <button>Funcionário: {{ atual.funcionário }}</button>
-          <button>Mês: {{ atual.mês }}</button>
+        <div class="três-dropdowns">
+          <div class="dropdown dd-lista">
+            <button class="dropdown-botão">Cargo: {{ atual.cargo.nome }}</button>
+            <div class="dropdown-content">
+              <button class="dd-item-lista" v-for="cargo in cargos" @click="clickCargo(cargo)">
+                <p>{{ cargo.nome }}</p>
+              </button>
+            </div>
+          </div>
+          <div class="dropdown dd-lista">
+            <button class="dropdown-botão">Funcionário: {{ atual.funcionário.nome }}</button>
+            <div class="dropdown-content">
+              <button class="dd-item-lista" v-for="funcionário in funcionários" @click="clickFuncionário(funcionário)">
+                <p>{{ funcionário.nome }}</p>
+              </button>
+            </div>
+          </div>
+          <div class="dropdown dd-lista">
+            <button class="dropdown-botão">Mês: {{ atual.mês }}</button>
+            <div class="dropdown-content">
+              <button class="dd-item-lista" v-for="mês in meses" @click="clickMês(cargo)">
+                <p>{{ mês }}</p>
+              </button>
+            </div>
+          </div>
         </div>
-        <button class="engrenagem"> <img src="./imagens/engrenagem.png"> </button>
+          
+        <div class="dropdown dd-config">
+          <button class="dropdown-botão engrenagem"> <img src="./imagens/engrenagem.png"> </button>
+          <div class="dropdown-content">
+            <input id="edit-funcionário" type="text" :value="atual.funcionário.nome" :placeholder="atual.funcionário.nome" maxlength="50">
+            <button class="confirmar" @click="confirmarEditFuncionário"> <img src="./imagens/edit.png"> </button>
+          </div>
+        </div>
       </div>
 
       <table id="planilha">
