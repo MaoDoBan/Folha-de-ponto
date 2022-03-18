@@ -36,10 +36,16 @@ export function postEditFuncionário(id, nome) {
         socket.once("resultEditFuncionário", status => resolve(status));
     });
 }
-///TODO: isso abaixo é placeholder
-export function postGetMêsFuncionário(funcionário, mês, ano) {
+export function postGetMeses() {
     return new Promise(resolve => {
-        socket.emit("getMêsFuncionário", funcionário, mês, ano);
-        socket.once("mêsFuncionário", data => resolve(data));
+        socket.emit("getMeses");
+        socket.once("meses", meses => resolve(meses));
+    });
+}
+///TODO: isso abaixo é placeholder
+export function postGetPontosFuncionário(idFuncionário, mêsAno) {
+    return new Promise(resolve => {
+        socket.emit("getPontosFuncionário", idFuncionário, mêsAno);
+        socket.once("pontosFuncionário", data => resolve(data));
     });
 }

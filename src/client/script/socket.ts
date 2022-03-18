@@ -45,11 +45,17 @@ export function postEditFuncionário(id: number, nome: string): Promise<string>{
   });
 }
 
+export function postGetMeses(): Promise<string[]>{
+  return new Promise(resolve => {
+    socket.emit("getMeses");
+    socket.once("meses", meses => resolve(meses));
+  });
+}
 
 ///TODO: isso abaixo é placeholder
-export function postGetMêsFuncionário(funcionário: string, mês: number, ano: number){
+export function postGetPontosFuncionário(idFuncionário: number, mêsAno: string){
   return new Promise(resolve => {
-    socket.emit("getMêsFuncionário", funcionário, mês, ano);
-    socket.once("mêsFuncionário",    data => resolve(data));
+    socket.emit("getPontosFuncionário", idFuncionário, mêsAno);
+    socket.once("pontosFuncionário",    data => resolve(data));
   });
 }
