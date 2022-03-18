@@ -1,9 +1,15 @@
+import { readFileSync } from "fs";
+import { Config } from "../../types/Config.js";
 import { initDatabase } from "./initDatabase.js";
 import { Cargo } from "../../types/Cargo.js";
 import { Funcionário } from "../../types/Funcionário.js";
+import { PontosNoBanco } from "../../types/Pontos.js";
+import { getMeses } from "./getMeses.js";
+import { calculaPontos } from "./calculaPontos.js";
 
 
 const database = initDatabase();
+const config: Config = JSON.parse( readFileSync("config.json", "utf8") );
 
 export const dados = {
   database,
@@ -100,6 +106,20 @@ export const dados = {
 
     this.sqlEditFuncionário.run(nome, id);
     return "ok";
+  },
+
+  getMeses(){ return getMeses(config.mêsInicial); },
+
+
+  sqlGetPontosFuncionário: database.prepare("SELECT * FROM FolhaDePonto WHERE id_funcionario = ? AND mes = ? AND ano = ?;"),
+
+  getPontosFuncionário(idFuncionário: number, mêsAno: string){
+    return calculaPontos(
+      idFuncionário,
+      mêsAno,
+      config,
+      (mês: number, ano: number)=>this.sqlGetPontosFuncionário.all(idFuncionário, mês, ano)
+    );
   }
 }
 
