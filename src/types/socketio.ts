@@ -2,31 +2,33 @@ import { Cargo } from "./Cargo";
 import { Funcionário } from "./Funcionário";
 
 
-export interface ServerToClientEvents {
+export interface ServerToClientEvents{
   sendCargos:            (cargos: Cargo[]) => void;
   resultAddCargo:        (status: string) => void;
   resultEditCargo:       (status: string) => void;
   sendFuncionários:      (funcionários: Funcionário[]) => void;
   resultAddFuncionário:  (status: string) => void;
   resultEditFuncionário: (status: string) => void;
-  mêsFuncionário:        (dados: any) => void;
+  meses:                 (meses: string[]) => void;
+  pontosFuncionário:     (dados: any) => void;
 }
 
-export interface ClientToServerEvents {
-  getCargos:         () => void;
-  addCargo:          (nome: string) => void;
-  editCargo:         (id: number, nome: string) => void;
-  getFuncionários:   (idCargo: number) => void;
-  addFuncionário:    (nomeFuncionário: string, idCargo: number) => void;
-  editFuncionário:   (id: number, nome: string) => void;
-  getMêsFuncionário: (funcionário: string, mês: number, ano: number) => void;
+export interface ClientToServerEvents{
+  getCargos:            () => void;
+  addCargo:             (nome: string) => void;
+  editCargo:            (id: number, nome: string) => void;
+  getFuncionários:      (idCargo: number) => void;
+  addFuncionário:       (nomeFuncionário: string, idCargo: number) => void;
+  editFuncionário:      (id: number, nome: string) => void;
+  getMeses:             () => void;
+  getPontosFuncionário: (idFuncionário: number, mêsAno: string) => void;
 }
 
-export interface InterServerEvents {
+export interface InterServerEvents{
   ping: () => void;
 }
 
-export interface SocketData {
+export interface SocketData{
   name: string;
   age: number;
 }
