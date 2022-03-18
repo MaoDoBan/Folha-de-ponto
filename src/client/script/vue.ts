@@ -21,16 +21,17 @@ export const app = createApp({
         página: "Início",
         cargo: {id: 0, nome: "É"},
         funcionário: {id: 0, nome: "Jão", id_cargo: 0},
-        mês: "02/2022",
+        mês: "03/2022",
       },
-      dias: {},
       input: {
         cargo: false,
         funcionário: false
       },
       cargos,
       funcionários: [],
-      meses: ["01/2022", "02/2022", "03/2022"]
+      meses: [],
+      planilha: {},
+      totais: {}
     };
   },
 
@@ -101,17 +102,25 @@ export const app = createApp({
     async clickFuncionário(funcionário: Funcionário){
       this.atual.funcionário = funcionário;
       
-      this.dias = await server.postGetMêsFuncionário("Ele Mesmo", 2, 2022); ////TODO: remover ou mover isso depois
+      this.meses = await server.postGetMeses();
+      this.atual.mês = this.meses[this.meses.length - 1];
+
+      const formulárioETotais: any = await server.postGetPontosFuncionário(funcionário.id, this.atual.mês);
+      this.planilha = formulárioETotais.planilhaPontos;
+      this.totais   = formulárioETotais.totais;
+      
       this.atual.página = "Funcionário";
     },
+
+    async clickMês(mês: string){
+      console.log("clicou em um mês ai:", mês);//--
+      this.atual.mês = mês;
+      /// pegar os dados do formulário denovo
+    }
     
-    async clickFuncionários(){///
+    /*async clickFuncionários(){///
       console.log("Todos os funcionários");
       this.atual.página = "Funcionários";
-    },
-
-    async clickMês(){
-      console.log("clicou em um mês ai");
-    }
+    },*/
   }
 });
