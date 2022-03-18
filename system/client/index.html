@@ -72,7 +72,7 @@
         </div>
       </div>
 
-      <button class="botão-item" @click="clickFuncionários"> <p>TODOS</p> </button>
+      <!--button class="botão-item" @click="clickFuncionários"> <p>TODOS</p> </button-->
       <button v-for="funcionário in funcionários" class="botão-item" @click="clickFuncionário(funcionário)">
         <p>{{ funcionário.nome }}</p>
       </button>
@@ -107,7 +107,7 @@
           <div class="dropdown dd-lista">
             <button class="dropdown-botão">Mês: {{ atual.mês }}</button>
             <div class="dropdown-content">
-              <button class="dd-item-lista" v-for="mês in meses" @click="clickMês(cargo)">
+              <button class="dd-item-lista" v-for="mês in meses" @click="clickMês(mês)">
                 <p>{{ mês }}</p>
               </button>
             </div>
@@ -124,7 +124,7 @@
       </div>
 
       <table id="planilha">
-        <tr>
+        <tr class="PRECISA_ARRUMAR_O_TAM_DA_FONTE">
           <th rowspan="2" style="width:5%">Dia</th>
           <th rowspan="2" style="width:5%">Sem</th>
           <th colspan="2" style="width:14%">1º Turno</th>
@@ -144,29 +144,29 @@
           <th style="width:7%">Entrada</th> <th>Saída</th>
         </tr>
 
-        <tr class="borda-bottom" v-for="dia in dias">
-          <th class="dia">{{ dia.numero }}</th>
-          <th class="dia">{{ dia.semana }}</th>
-          <td>{{ dia.t1entrada }}</td>
-          <td>{{ dia.t1saída }}</td>
-          <td>{{ dia.intervalo }}</td>
-          <td>{{ dia.t2entrada }}</td>
-          <td>{{ dia.t2saída }}</td>
-          <td>{{ dia.t3entrada }}</td>
-          <td>{{ dia.t3saída }}</td>
-          <td>{{ dia.total }}</td>
-          <td>{{ dia.total50 }}</td>
-          <td>{{ dia.total100 }}</td>
-          <td>{{ dia.cSábado }}</td>
-          <td>{{ dia.obs }}</td>
+        <tr class="borda-bottom" v-for="linha in planilha">
+          <th class="dia">{{ linha.dia }}</th>
+          <th class="dia">{{ linha.diaNaSemana }}</th>
+          <td>{{ linha.entrada1 }}</td>
+          <td>{{ linha.saida1 }}</td>
+          <td>{{ linha.intervalo }}</td>
+          <td>{{ linha.entrada2 }}</td>
+          <td>{{ linha.saida2 }}</td>
+          <td>{{ linha.entrada3 }}</td>
+          <td>{{ linha.saida3 }}</td>
+          <td>{{ linha.total }}</td>
+          <td>{{ linha.total50 }}</td>
+          <td>{{ linha.total100 }}</td>
+          <td>{{ linha.compSábado }}</td>
+          <td>{{ linha.observacao }}</td>
         </tr>
 
         <tr>
-          <th colspan="9" class="sub-título"> <p>Totais no mês:</p> </th>
-          <td>11</th>
-          <td>22</th>
-          <td>33</th>
-          <td>44</th>
+          <th colspan="10" class="sub-título"> <p>Totais no mês:</p> </th>
+          <!--td>11</th-->
+          <td>{{ totais.total50 }}</td>
+          <td>{{ totais.total100 }}</td>
+          <td>{{ totais.compSábado }}</td>
           <th></th>
         </tr>
       </table>
