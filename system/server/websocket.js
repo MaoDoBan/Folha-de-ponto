@@ -1,5 +1,4 @@
 import { sockets } from "./http.js";
-import { fevereiro } from "./calculaDia.js"; ////
 const clientesConectados = [];
 export function iniciaSocketIo(dados) {
     sockets.on("connection", client => {
@@ -29,14 +28,16 @@ export function iniciaSocketIo(dados) {
         client.on("editFuncionário", (id, nome) => {
             client.emit("resultEditFuncionário", dados.editFuncionário(id, nome));
         });
+        client.on("getMeses", () => {
+            client.emit("meses", dados.getMeses());
+        });
+        client.on("getPontosFuncionário", (idFuncionário, mêsAno) => {
+            console.log(`O ${client.id} ta querendo os dados do funcionário ${idFuncionário} do mês ` + mêsAno); ///--
+            client.emit("pontosFuncionário", dados.getPontosFuncionário(idFuncionário, mêsAno));
+        });
         // client.on("", ()=>{
         //   ;
         // });
-        ///placeholder abaixo
-        client.on("getMêsFuncionário", (funcionário, mês, ano) => {
-            console.log(`O ${client.id} ta querendo os dados do ${funcionário} do mês ` + mês + "/" + ano);
-            client.emit("mêsFuncionário", fevereiro);
-        });
     });
 }
 ;
