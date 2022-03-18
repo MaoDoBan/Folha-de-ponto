@@ -1,0 +1,31 @@
+export function getMeses(mêsAnoInicial) {
+    const resultadoRegex = mêsAnoInicial.match(/^(\d|\d{2})[\/](\d{4})$/);
+    if (resultadoRegex == null)
+        return ["03/2022"];
+    let mês = Number(resultadoRegex[1]);
+    let ano = Number(resultadoRegex[2]);
+    const meses = [];
+    const agora = new Date();
+    const mêsAtual = agora.getMonth() + 1;
+    const anoAtual = agora.getFullYear();
+    let mêsAno;
+    while (true) {
+        mêsAno = mês + "/" + ano;
+        mêsAno = mês > 9 ? mêsAno : "0" + mêsAno;
+        meses.push(mêsAno);
+        mês++;
+        if (mês > 12) {
+            mês = 1;
+            ano++;
+        }
+        if (ano > anoAtual)
+            break;
+        if (ano < anoAtual)
+            continue;
+        //daqui pra baixo é ano == anoAtual
+        if (mês <= mêsAtual)
+            continue;
+        break;
+    }
+    return meses;
+}
