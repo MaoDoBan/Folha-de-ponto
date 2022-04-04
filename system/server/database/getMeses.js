@@ -18,14 +18,12 @@ export function getMeses(mêsAnoInicial) {
             mês = 1;
             ano++;
         }
-        if (ano > anoAtual)
-            break;
         if (ano < anoAtual)
             continue;
-        //daqui pra baixo é ano == anoAtual
-        if (mês <= mêsAtual)
-            continue;
-        break;
+        if (ano > anoAtual)
+            break;
+        if (mês > mêsAtual)
+            break; //ano == anoAtual
     }
     return meses;
 }

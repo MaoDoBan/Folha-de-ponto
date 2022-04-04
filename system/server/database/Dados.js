@@ -2,6 +2,7 @@ import { readFileSync } from "fs";
 import { initDatabase } from "./initDatabase.js";
 import { getMeses } from "./getMeses.js";
 import { calculaPontos } from "./calculaPontos.js";
+import { recalculaTotais } from "../recalculaTotais.js";
 const database = initDatabase();
 const config = JSON.parse(readFileSync("config.json", "utf8"));
 export const dados = {
@@ -100,7 +101,37 @@ export const dados = {
     },
     getMeses() { return getMeses(config.mêsInicial); },
     sqlGetPontosFuncionário: database.prepare("SELECT * FROM FolhaDePonto WHERE id_funcionario = ? AND mes = ? AND ano = ?;"),
+    sqlAddPontoFuncionário: database.prepare("INSERT INTO FolhaDePonto " +
+        "( id_funcionario,  dia,  mes,  ano,  entrada1,  saida1,  entrada2,  saida2,  entrada3,  saida3,  observacao) VALUES" +
+        "(@id_funcionario, @dia, @mes, @ano, @entrada1, @saida1, @entrada2, @saida2, @entrada3, @saida3, @observacao);"),
+    sqlEditPontoFuncionário: database.prepare("REPLACE INTO FolhaDePonto " +
+        "( id, id_funcionario,  dia,  mes,  ano,  entrada1,  saida1,  entrada2,  saida2,  entrada3,  saida3,  observacao) VALUES" +
+        "(@id, @id_funcionario, @dia, @mes, @ano, @entrada1, @saida1, @entrada2, @saida2, @entrada3, @saida3, @observacao);"),
     getPontosFuncionário(idFuncionário, mêsAno) {
         return calculaPontos(idFuncionário, mêsAno, config, (mês, ano) => this.sqlGetPontosFuncionário.all(idFuncionário, mês, ano));
+    },
+    setPontoFuncionário(ponto, totais) {
+        //verificar se o funcionário existe no banco; ?
+        /*const tempos = {// impedindo a parada se o tempo for negativo
+          entrada1: tempoToMinutos(ponto.entrada1),
+          entrada2: tempoToMinutos(ponto.entrada2),
+          saida1:   tempoToMinutos(ponto.saida1),
+          saida2:   tempoToMinutos(ponto.saida2)
+        }
+        if(tempos.saida1 < tempos.entrada1 || tempos.saida2 < tempos.entrada2)
+          return "o horário de saída não pode ser antes do horário de entrada!";*/
+        try {
+            if (ponto.id == -1) {
+                const result = this.sqlAddPontoFuncionário.run(ponto);
+                ponto.id = result.lastInsertRowid;
+            }
+            else {
+                this.sqlEditPontoFuncionário.run(ponto);
+            }
+        }
+        catch (erro) {
+            return "o banco de dados não conseguiu salvar o ponto informado!";
+        }
+        return recalculaTotais(ponto, totais, config);
     }
 };

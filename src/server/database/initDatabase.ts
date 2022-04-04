@@ -25,15 +25,14 @@ export function initDatabase(){
   }
 
   const tabelaFolhaDePonto = tabelaExiste.get('FolhaDePonto');
-  if(!tabelaFolhaDePonto['count(*)']){
+  if(!tabelaFolhaDePonto['count(*)']){ // drop table FolhaDePonto;
     database.prepare(
       "CREATE TABLE FolhaDePonto ("+
-        "id_funcionario INTEGER NOT NULL REFERENCES Funcionarios(id), dia INTEGER, mes INTEGER, ano INTEGER, "+
-        "entrada1 TEXT, saida1 TEXT, entrada2 TEXT, saida2 TEXT, entrada3 TEXT, saida3 TEXT, observacao TEXT, "+
-        "CONSTRAINT id PRIMARY KEY (id_funcionario, dia, mes, ano)"+
+        "id INTEGER PRIMARY KEY AUTOINCREMENT, id_funcionario INTEGER NOT NULL REFERENCES Funcionarios(id), dia INTEGER, mes INTEGER, ano INTEGER, "+
+        "entrada1 TEXT, saida1 TEXT, entrada2 TEXT, saida2 TEXT, entrada3 TEXT, saida3 TEXT, observacao TEXT"+
       ");"
     ).run();
-    database.prepare("CREATE UNIQUE INDEX idx_funcionario_mes_ano ON FolhaDePonto(id_funcionario, mes, ano);").run();
+    database.prepare("CREATE UNIQUE INDEX idx_funcionario_mes_ano ON FolhaDePonto(id_funcionario, dia, mes, ano);").run(); //garantir não duplicar dado
     console.log("Banco de dados: criei tabela FolhaDePonto");
   }
 

@@ -35,6 +35,10 @@ export function iniciaSocketIo(dados) {
             console.log(`O ${client.id} ta querendo os dados do funcionário ${idFuncionário} do mês ` + mêsAno); ///--
             client.emit("pontosFuncionário", dados.getPontosFuncionário(idFuncionário, mêsAno));
         });
+        client.on("setPontoFuncionário", (ponto, totais) => {
+            console.log(`O ${client.id} ta salvando o ponto`); //, ponto
+            client.emit("confirmaPonto", dados.setPontoFuncionário(ponto, totais));
+        });
         // client.on("", ()=>{
         //   ;
         // });

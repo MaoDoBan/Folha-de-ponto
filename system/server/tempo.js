@@ -3,13 +3,14 @@ export function tempoToMinutos(tempo) {
         return 0;
     let sinal = 1;
     if (tempo.startsWith("- ")) {
-        tempo.replace("- ", "");
+        tempo = tempo.replace("- ", "");
         sinal = -1;
     }
     const partes = tempo.split(":"); //não suporta notação dias:horas:minutos, apenas suporta h:m
-    const horas = Number(partes.shift());
-    const minutosSobra = Number(partes.shift());
-    return (horas * 60 + minutosSobra) * sinal;
+    const minutosSobra = Number(partes.pop());
+    const horas = Number(partes.pop());
+    const dias = partes.length ? Number(partes.pop()) : 0;
+    return (dias * 24 * 60 + horas * 60 + minutosSobra) * sinal;
 }
 const minutosNaHora = 60 * 24;
 export function minutosToTempo(todosOsMinutos) {

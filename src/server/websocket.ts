@@ -1,5 +1,6 @@
 import { sockets, Socket } from "./http.js";
 import { Dados } from "./database/Dados.js";
+import { LinhaPlanilhaPontos, Totais } from "../types/Pontos.js";
 
 
 const clientesConectados: Socket[] = [];
@@ -45,6 +46,11 @@ export function iniciaSocketIo(dados: Dados){
     client.on("getPontosFuncionário", (idFuncionário: number, mêsAno: string)=>{
       console.log(`O ${client.id} ta querendo os dados do funcionário ${idFuncionário} do mês `+mêsAno);///--
       client.emit("pontosFuncionário", dados.getPontosFuncionário(idFuncionário, mêsAno));
+    });
+
+    client.on("setPontoFuncionário", (ponto: LinhaPlanilhaPontos, totais: Totais)=>{
+      console.log(`O ${client.id} ta salvando o ponto`);//, ponto
+      client.emit("confirmaPonto", dados.setPontoFuncionário(ponto, totais));
     });
 
     // client.on("", ()=>{
