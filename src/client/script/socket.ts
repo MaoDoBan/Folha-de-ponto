@@ -2,6 +2,7 @@ import { io, Socket } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
 import { ServerToClientEvents, ClientToServerEvents } from "../../types/socketio.js";
 import { Cargo } from "../../types/Cargo.js";
 import { Funcionário } from "../../types/Funcionário.js";
+import { LinhaETotais, PlanilhaETotais, LinhaPlanilhaPontos, Totais } from "../../types/Pontos.js";
 
 
 export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
@@ -53,9 +54,17 @@ export function postGetMeses(): Promise<string[]>{
 }
 
 ///TODO: isso abaixo é placeholder
-export function postGetPontosFuncionário(idFuncionário: number, mêsAno: string){
+export function postGetPontosFuncionário(idFuncionário: number, mêsAno: string): Promise<PlanilhaETotais | string>{
   return new Promise(resolve => {
     socket.emit("getPontosFuncionário", idFuncionário, mêsAno);
-    socket.once("pontosFuncionário",    data => resolve(data));
+    socket.once("pontosFuncionário",    dados => resolve(dados));
   });
 }
+
+export function postSetPontoFuncionário(ponto: LinhaPlanilhaPontos, totais: Totais): Promise<LinhaETotais | string>{
+  return new Promise(resolve => {
+    socket.emit("setPontoFuncionário", ponto, totais);
+    socket.once("confirmaPonto",       dados => resolve(dados));
+  });
+}
+

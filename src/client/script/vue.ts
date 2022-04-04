@@ -1,6 +1,9 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 import { Cargo } from "../../types/Cargo.js";
 import { Funcionário } from "../../types/Funcionário.js";
+import { LinhaPlanilhaPontos } from "../../types/Pontos.js";
+import { checaAlteraçõesObs } from "./checaAlteraçõesNasObs.js";
+import { listaObservações } from "./listaObservações.js";
 import * as server from "./socket.js";
 
 
@@ -11,7 +14,12 @@ const páginasNomeToClass = {
   "Calendário": "#menu-calendario",
   "Logs":       "#menu-logs"
 };
+type EntradasESaídas = "entrada1" | "saida1" | "entrada2" | "saida2" | "entrada3" | "saida3";
+const entradasESaídas = [, "entrada1", "saida1", "entrada2", "saida2", "entrada3", "saida3"];//EntradasESaídas
 
+function delay(msTime: number){
+  return new Promise( resolve => setTimeout(resolve, msTime) );
+};
 const cargos = await server.postGetCargos();
 
 export const app = createApp({
@@ -31,7 +39,8 @@ export const app = createApp({
       funcionários: [],
       meses: [],
       planilha: {},
-      totais: {}
+      totais: {},
+      observações: {}
     };
   },
 
@@ -105,22 +114,83 @@ export const app = createApp({
       this.meses = await server.postGetMeses();
       this.atual.mês = this.meses[this.meses.length - 1];
 
-      const formulárioETotais: any = await server.postGetPontosFuncionário(funcionário.id, this.atual.mês);
-      this.planilha = formulárioETotais.planilhaPontos;
-      this.totais   = formulárioETotais.totais;
+      const formulárioETotais = await server.postGetPontosFuncionário(funcionário.id, this.atual.mês);
+      if(typeof formulárioETotais == "string") return alert("Erro: "+formulárioETotais);
+
+      this.planilha    = formulárioETotais.planilhaPontos; //-console.log(this.planilha.length);
+      this.totais      = formulárioETotais.totais;
+      this.observações = listaObservações(this.planilha);
       
       this.atual.página = "Funcionário";
     },
 
     async clickMês(mês: string){
-      console.log("clicou em um mês ai:", mês);//--
       this.atual.mês = mês;
-      /// pegar os dados do formulário denovo
-    }
+      
+      const formulárioETotais = await server.postGetPontosFuncionário(this.atual.funcionário.id, this.atual.mês);
+      if(typeof formulárioETotais == "string") return alert("Erro: "+formulárioETotais);
+
+      this.planilha    = formulárioETotais.planilhaPontos;
+      this.totais      = formulárioETotais.totais;
+      this.observações = listaObservações(this.planilha);
+    },
     
+    async enterPonto(event: Event, dia: number){
+      const ponto = {...this.planilha[dia - 1]} as LinhaPlanilhaPontos;
+
+      let contadorNovosHorários = 0;
+      let input: HTMLInputElement;
+      for(let i = 1; i <= 6; i++){
+        input = document.querySelector("#i"+(dia*6+i)) as HTMLInputElement;
+        if(input.value == "") continue;
+        ponto[entradasESaídas[i] as EntradasESaídas] = input.value;
+        contadorNovosHorários++;
+      }
+      if(contadorNovosHorários == 0) return;
+
+      const resposta = await server.postSetPontoFuncionário(ponto, this.totais);
+      if(typeof resposta == "string") return alert("Erro: "+resposta);
+
+      this.planilha[dia - 1] = resposta.linha;
+      this.totais = resposta.totais;
+
+      const inputAtual = event.target as HTMLInputElement;
+      const idPróximo = Number( inputAtual.id.slice(1) ) + 1;
+      const próximoInput = document.querySelector("#i"+idPróximo) as HTMLInputElement;
+      if(!próximoInput){
+        inputAtual.blur();
+        return;
+      }
+      próximoInput.focus();
+    },
+
+    async novaObservação(linha: LinhaPlanilhaPontos){
+      console.log("nova obs");
+      const deuErro = await checaAlteraçõesObs(this.observações, this.totais);
+      if(deuErro) return;
+
+      linha.observacao = linha.observacao || " "; //-console.log("linha:",linha, "na planilha:", this.planilha[linha.dia-1]);
+      this.observações = listaObservações(this.planilha);
+      //-console.log("obss:",this.observações);
+
+      await delay(300);
+      const novoInputObs = document.querySelector("#o"+linha.dia) as HTMLInputElement;
+      novoInputObs.focus();
+      novoInputObs.select();
+    },
+    async enterObservação(idObs: number){
+      console.log("enter obs");
+      const deuErro = await checaAlteraçõesObs(this.observações, this.totais);
+      if(deuErro) return;
+
+      const inputObs = document.querySelector("#o"+idObs) as HTMLInputElement;
+      inputObs.blur();
+    }
+  }
+});
+
+
     /*async clickFuncionários(){///
       console.log("Todos os funcionários");
       this.atual.página = "Funcionários";
     },*/
-  }
-});

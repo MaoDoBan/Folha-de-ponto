@@ -46,6 +46,12 @@ export function postGetMeses() {
 export function postGetPontosFuncionário(idFuncionário, mêsAno) {
     return new Promise(resolve => {
         socket.emit("getPontosFuncionário", idFuncionário, mêsAno);
-        socket.once("pontosFuncionário", data => resolve(data));
+        socket.once("pontosFuncionário", dados => resolve(dados));
+    });
+}
+export function postSetPontoFuncionário(ponto, totais) {
+    return new Promise(resolve => {
+        socket.emit("setPontoFuncionário", ponto, totais);
+        socket.once("confirmaPonto", dados => resolve(dados));
     });
 }
