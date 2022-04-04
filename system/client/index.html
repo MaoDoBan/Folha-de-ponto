@@ -30,7 +30,7 @@
       <button id="menu-inicio" class="ressaltado" @click="clickItemMenu('Início')"    >Início</button>
       <button id="menu-cargos"                    @click="clickItemMenu('Cargos')"    >Cargos</button>
       <!--button id="menu-calendario"                @click="clickItemMenu('Calendário')">Calendário</button-->
-      <button id="menu-logs"                      @click="clickItemMenu('Logs')"      >Logs</button>
+      <!--button id="menu-logs"                      @click="clickItemMenu('Logs')"      >Logs</button-->
     </div>
   </div>
 
@@ -124,41 +124,44 @@
       </div>
 
       <table id="planilha">
-        <tr class="PRECISA_ARRUMAR_O_TAM_DA_FONTE">
+        <tr class="header-planilha">
           <th rowspan="2" style="width:5%">Dia</th>
           <th rowspan="2" style="width:5%">Sem</th>
           <th colspan="2" style="width:14%">1º Turno</th>
           <th rowspan="2" style="width:7%" >Intervalo</th>
           <th colspan="2" style="width:14%">2º Turno</th>
           <th colspan="2" style="width:14%">3º Turno</th>
-          <th rowspan="2" style="width:8%" >TOTAL</th>
-          <th rowspan="2" style="width:8%" >TOTAL 50%</th>
-          <th rowspan="2" style="width:8%" >TOTAL 100%</th>
+          <th rowspan="2" style="width:9%" >TOTAL</th>
+          <th rowspan="2" style="width:9%" >TOTAL 50%</th>
+          <th rowspan="2" style="width:9%" >TOTAL 100%</th>
           <th rowspan="2" style="width:11%">COMPENSAÇÃO SÁBADO</th>
-          <th rowspan="2">Obs</th>
+          <th rowspan="2">OBS</th>
         </tr>
 
-        <tr class="borda-bottom">
+        <tr class="borda-bottom fonte14">
           <th style="width:7%">Entrada</th> <th>Saída</th>
           <th style="width:7%">Entrada</th> <th>Saída</th>
           <th style="width:7%">Entrada</th> <th>Saída</th>
         </tr>
 
-        <tr class="borda-bottom" v-for="linha in planilha">
+        <tr class="borda-bottom fonte14" v-for="linha in planilha">
           <th class="dia">{{ linha.dia }}</th>
           <th class="dia">{{ linha.diaNaSemana }}</th>
-          <td>{{ linha.entrada1 }}</td>
-          <td>{{ linha.saida1 }}</td>
+          <td><input type="time" :value="linha.entrada1" maxlength="5" :id="'i'+(linha.dia*6+1)" @keyup.enter="enterPonto($event, linha.dia, 'entrada1')"></td>
+          <td><input type="time" :value="linha.saida1"   maxlength="5" :id="'i'+(linha.dia*6+2)" @keyup.enter="enterPonto($event, linha.dia, 'saida1')"></td>
           <td>{{ linha.intervalo }}</td>
-          <td>{{ linha.entrada2 }}</td>
-          <td>{{ linha.saida2 }}</td>
-          <td>{{ linha.entrada3 }}</td>
-          <td>{{ linha.saida3 }}</td>
+          <td><input type="time" :value="linha.entrada2" maxlength="5" :id="'i'+(linha.dia*6+3)" @keyup.enter="enterPonto($event, linha.dia, 'entrada2')"></td>
+          <td><input type="time" :value="linha.saida2"   maxlength="5" :id="'i'+(linha.dia*6+4)" @keyup.enter="enterPonto($event, linha.dia, 'saida2')"></td>
+          <td><input type="time" :value="linha.entrada3" maxlength="5" :id="'i'+(linha.dia*6+5)" @keyup.enter="enterPonto($event, linha.dia, 'entrada3')"></td>
+          <td><input type="time" :value="linha.saida3"   maxlength="5" :id="'i'+(linha.dia*6+6)" @keyup.enter="enterPonto($event, linha.dia, 'saida3')"></td>
           <td>{{ linha.total }}</td>
           <td>{{ linha.total50 }}</td>
           <td>{{ linha.total100 }}</td>
           <td>{{ linha.compSábado }}</td>
-          <td>{{ linha.observacao }}</td>
+          <td class="obs-cell">
+            <div v-if="observações[linha.dia]">{{ observações[linha.dia].id }}</div>
+            <button class="add-obs" v-if="!observações[linha.dia]" @click="novaObservação(linha)"><img src="./imagens/add.png"></button>
+          </td>
         </tr>
 
         <tr>
@@ -173,7 +176,13 @@
 
       <div class="obs">
         <div class="sub-título"> <p>Observações:</p> </div>
-        <div id="grade-obs">Bah</div>
+        <table>
+          <tr class="obs-linha" v-for="obs in observações">
+            <td class="label-obs">{{ obs.label }}</td>
+            <td> <input class="texto-obs" type="text" :id="'o'+obs.linha.dia" @keyup.enter="enterObservação(obs.linha.dia)" :value="obs.linha.observacao"></input> </td>
+            <!--td> <textarea class="texto-obs" :id="'o'+obs.id" @keyup.enter="enterObservação">{{ obs.texto }}</textarea> </td-->
+          </tr>
+        </table>
       </div>
     </div>
     
