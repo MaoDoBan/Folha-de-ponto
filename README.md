@@ -1,6 +1,8 @@
 # Folha de Ponto
-Registra os horários de entrada, almoço e saída dos funcionários da Limpatec
+Registra os horários de entrada, almoço e saída dos funcionários da empresa Limpatec
 
+Esta versão é um MVP: mínimo viável produto.
+Não possui logs de uso nem outra features sugeridas pelo cliente.
 
 
 "scripts": {
