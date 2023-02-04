@@ -1,8 +1,7 @@
 # Folha de Ponto
 Registra os horários de entrada, almoço e saída dos funcionários da Empresa
 
-Esta versão é um MVP: mínimo viável produto.
-Não possui logs de uso nem outra features sugeridas pelo cliente.
+Versão testável do sistema: https://folhadeponto.maodoban.repl.co
 
 
 ### Pra rodar o sistema via comando:
