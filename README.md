@@ -5,12 +5,6 @@ Esta versão é um MVP: mínimo viável produto.
 Não possui logs de uso nem outra features sugeridas pelo cliente.
 
 
-"scripts": {
-    "build": "tsc && node ./js/postCompile.js",
-    "test": "npm run build && node ./js/runCodeTests.js"
-  }
-
-
 ### Pra rodar o sistema via comando:
 npm start
 
